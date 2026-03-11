@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
 // ATTIVITÀ 1: Digital Journaling
-export const DigitalJournaling = ({ toggleAccordion, openAccordion }) => {
+const DigitalJournaling = ({ toggleAccordion, openAccordion }) => {
+  // 1. Stato per l'array di tutte le annotazioni (quello che invieremo al server)
   const [entries, setEntries] = useState([]);
+  // Stato temporaneo per gestire il campo di testo mentre l'utente digita
   const [newEntry, setNewEntry] = useState('');
 
+  // 2. Aggiunge temporaneamente la nota alla lista locale
   const handleAddEntry = () => {
     if (newEntry.trim() !== '') {
       setEntries([...entries, { text: newEntry, date: new Date().toLocaleDateString() }]);
@@ -12,40 +15,74 @@ export const DigitalJournaling = ({ toggleAccordion, openAccordion }) => {
     }
   };
 
+  // 3. Funzione che intercetta il salvataggio per l'invio al server
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Evita il ricaricamento della pagina
+    
+    // Ecco il tuo array completo di annotazioni pronto per il database!
+    console.log("Dati del Digital Journaling pronti per il server:", entries);
+    
+    // Esempio: if (onSave) onSave({ journaling: entries });
+  };
+
   return (
-    <div className={`accordion-item ${openAccordion.digitaljournaling ? 'active' : ''}`} id="accordion-journal">
+    <div className={`accordion-item ${openAccordion?.digitaljournaling ? 'active' : ''}`} id="accordion-journal">
       <div className="accordion-header" onClick={() => toggleAccordion('digitaljournaling')}>
         <div className="header-title">
           <span className="icon">📖</span>
           <h3>Digital Journaling</h3>
         </div>
-        <span className="toggle-icon">{openAccordion.digitaljournaling ? '−' : '+'}</span>
+        <span className="toggle-icon">{openAccordion?.digitaljournaling ? '−' : '+'}</span>
       </div>
+      
       <div className="accordion-content">
         <div className="accordion-inner">
           <p style={{ color: '#4a5568', marginBottom: '1rem' }}>Annota qui ogni giorno i tuoi piccoli e grandi successi clinici e personali.</p>
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem' }}>
-            <input 
-              type="text" 
-              value={newEntry} 
-              onChange={(e) => setNewEntry(e.target.value)} 
-              placeholder="Oggi sono fiero di me perché..." 
-              style={{ flex: 1, padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e0' }}
-            />
-            <button onClick={handleAddEntry} className="btn btn-primary" style={{ backgroundColor: '#38b2ac', border: 'none', padding: '10px 20px', color: 'white', borderRadius: '5px' }}>
-              Aggiungi
-            </button>
-          </div>
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
-            {entries.map((entry, index) => (
-              <li key={index} style={{ backgroundColor: '#f7fafc', padding: '10px', marginBottom: '5px', borderRadius: '5px', borderLeft: '4px solid #38b2ac' }}>
-                <small style={{ color: '#a0aec0', display: 'block' }}>{entry.date}</small>
-                {entry.text}
-              </li>
-            ))}
-          </ul>
+          
+          {/* Aggiunto il form per gestire l'invio finale al server */}
+          <form onSubmit={handleSubmit}>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem' }}>
+              <input 
+                type="text" 
+                value={newEntry} 
+                onChange={(e) => setNewEntry(e.target.value)} 
+                placeholder="Oggi sono fiero di me perché..." 
+                style={{ flex: 1, padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e0' }}
+              />
+              {/* Reso esplicitamente type="button" per evitare che faccia il submit della pagina */}
+              <button 
+                type="button" 
+                onClick={handleAddEntry} 
+                className="btn btn-primary" 
+                style={{ backgroundColor: '#38b2ac', border: 'none', padding: '10px 20px', color: 'white', borderRadius: '5px', cursor: 'pointer' }}
+              >
+                Aggiungi
+              </button>
+            </div>
+            
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              {entries.map((entry, index) => (
+                <li key={index} style={{ backgroundColor: '#f7fafc', padding: '10px', marginBottom: '5px', borderRadius: '5px', borderLeft: '4px solid #38b2ac' }}>
+                  <small style={{ color: '#a0aec0', display: 'block' }}>{entry.date}</small>
+                  {entry.text}
+                </li>
+              ))}
+            </ul>
+
+            {/* Mostra il pulsante di salvataggio finale solo se ci sono annotazioni */}
+            {entries.length > 0 && (
+              <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+                <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2c7a7b', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                  Salva il Diario nel Database
+                </button>
+              </div>
+            )}
+          </form>
+
         </div>
       </div>
     </div>
   );
 };
+
+export { DigitalJournaling };
