@@ -46,7 +46,7 @@ const Navigation = (props) => {
             <li><Link to="/gestione-tempo">Gestione del Tempo</Link></li>
             <li><Link to="/problem-solving">Problem Solving</Link></li>
             <li><Link to="/autoregolazione-emotiva">Autoregolazione emotiva</Link></li>
-          <li><Link to="/valorizzazione-di-se">Valorizzazione di sè (autostima)</Link></li>
+          <li><Link to="/valorizzazione-di-se">Valorizzazione di sè</Link></li>
           <li><Link to="/orientamento-obiettivo">Orientamento all'obiettivo</Link></li>
           <li><Link to="/intraprendenza">Intraprendenza</Link></li>
           <li><Link to="/attribuzione-causale">Attribuzione causale del successo e dell'insuccesso</Link></li>
