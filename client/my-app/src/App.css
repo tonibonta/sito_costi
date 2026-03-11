@@ -1,0 +1,845 @@
+/* style.css */
+:root {
+    --primary-color: #2b6cb0; /* Blu accademico/sanitario */
+    --primary-dark: #1e4b82;
+    --secondary-color: #38a169; /* Verde rassicurante */
+    --background-color: #f0f4f8; /* Grigio/Blu chiarissimo */
+    --text-color: #2d3748;
+    --card-bg: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    scroll-behavior: smooth; /* Rende lo scroll fluido */
+    scroll-padding-top: 90px; /* Evita che il menu fisso copra il titolo quando si clicca il bottone */
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    height:100%
+}
+
+/* Animazione di caricamento pagina */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header e Navigazione */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+   
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Icona Hamburger */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20px;
+    width: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover .bar {
+    background-color: #e2e8f0;
+}
+
+nav h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Menu Laterale (Sidebar) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px; /* Nascosta di default */
+    width: 320px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+    z-index: 2000;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    left: 0; /* Mostra la sidebar */
+}
+
+.sidebar-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.4rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+}
+
+.sidebar a:hover {
+    color: var(--primary-color);
+    padding-left: 10px; /* Effetto slide sul testo */
+}
+
+/* Overlay Sfondo Scuro */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Contenitore Principale */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #4299e1 100%);
+    color: white;
+    padding: 5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 15px 30px rgba(43, 108, 176, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.btn {
+    display: inline-block;
+    background-color: white;
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    background-color: var(--background-color);
+}
+
+/* Sezioni di testo */
+.info-section {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border-left: 5px solid var(--secondary-color);
+}
+
+.info-section h3 {
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- FLIP CARDS 3D --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.skill-card {
+    background-color: transparent;
+    perspective: 1000px; /* Crea lo spazio 3D */
+    height: 220px;
+    cursor: pointer;
+}
+
+.skill-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Trigger della rotazione quando si passa il mouse */
+.skill-card:hover .skill-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Stili comuni fronte/retro */
+.skill-card-front, .skill-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Nasconde il retro del div */
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* FRONTE: Mostra solo il titolo */
+.skill-card-front {
+    background-color: var(--card-bg);
+    border-bottom: 5px solid var(--secondary-color);
+}
+
+.skill-card-front h4 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* RETRO: Mostra la spiegazione (inversa di 180 gradi di default) */
+.skill-card-back {
+    background-color: var(--primary-color);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.skill-card-back p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    color: #718096;
+    margin-top: 4rem;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+}
+
+/* Responsive per smartphone */
+@media (max-width: 768px) {
+    .hero h2 { font-size: 2rem; }
+    .hero p { font-size: 1rem; }
+}
+
+/* =========================================
+   PAGINA PROFILO UTENTE
+========================================= */
+.profile-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.profile-header-banner {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.profile-header-banner h2 {
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+}
+
+.profile-header-banner p {
+    color: #718096;
+    font-size: 1.1rem;
+}
+
+/* Griglia Profilo */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 1 parte a sx, 2 parti a dx */
+    gap: 2rem;
+}
+
+.profile-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Colonna Sinistra (User Info) */
+.user-info-card {
+    text-align: center;
+}
+
+.avatar-container {
+    margin-bottom: 1rem;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.user-info-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.user-role {
+    color: #718096;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.user-id {
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 1.5rem 0;
+}
+
+/* Barre di Progresso */
+.progress-section h4, .badges-section h4 {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.progress-bar-bg {
+    background-color: #e2e8f0;
+    border-radius: 20px;
+    height: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    height: 100%;
+    border-radius: 20px;
+    transition: width 1s ease-in-out;
+}
+
+.progress-text {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-top: 0.5rem;
+    text-align: right;
+    font-weight: 600;
+}
+
+/* Badge (Pillole) */
+.badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    background-color: #ebf8ff;
+    color: var(--primary-dark);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.badge.locked {
+    background-color: #f7fafc;
+    color: #a0aec0;
+    border: 1px dashed #cbd5e0;
+    box-shadow: none;
+}
+
+/* Colonna Destra (Form) */
+.card-title {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 0.5rem;
+}
+
+.profile-form .form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-group {
+    flex: 1;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    padding: 0.8rem 1rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--text-color);
+    border: 1px solid #cbd5e0;
+}
+
+.btn-secondary:hover {
+    background-color: #edf2f7;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Responsive per smartphone */
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr; /* Mette la griglia su una sola colonna */
+    }
+    
+    .profile-form .form-row {
+        flex-direction: column; /* Impila i campi form */
+        gap: 0;
+    }
+}
+
+/* =========================================
+   ACCORDION (Pannelli a comparsa) E QUESTIONARI
+========================================= */
+
+/* Blocco principale */
+.accordion-item {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+    overflow: hidden; /* Importante per l'animazione */
+}
+
+/* Header cliccabile */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f8fafc;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-title h3 {
+    color: var(--primary-dark);
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.header-title .icon {
+    font-size: 1.5rem;
+}
+
+.toggle-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+
+/* Corpo del Form (Animazione Fluida con CSS Grid) */
+.accordion-content {
+    display: grid;
+    grid-template-rows: 0fr; /* Chiuso di default */
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #fafbfc;
+}
+
+.accordion-item.active .accordion-content {
+    grid-template-rows: 1fr; /* Si apre fluidamente */
+}
+
+.accordion-inner {
+    overflow: hidden; /* Nasconde il contenuto mentre è chiuso */
+    padding: 0 2rem; /* Il padding Y verrà applicato sotto per non rompere l'animazione */
+}
+
+.accordion-item.active .accordion-inner {
+    padding: 0 2rem 2rem 2rem;
+}
+
+/* Stili Istruzioni */
+.instruction-box {
+    background-color: #ebf8ff;
+    border-left: 4px solid var(--primary-color);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.instruction-box h4 {
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.scale-legend {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.scale-legend ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.scale-legend li {
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Stili Domande */
+.question-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #edf2f7;
+    gap: 2rem;
+}
+
+.question-text {
+    flex: 1;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Custom Radio Buttons (Bottoni numerici) */
+.radio-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.radio-btn input[type="radio"] {
+    display: none; /* Nasconde il pallino nativo */
+}
+
+.radio-btn span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #cbd5e0;
+    color: #4a5568;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radio-btn:hover span {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Quando il radio è selezionato */
+.radio-btn input[type="radio"]:checked + span {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(43, 108, 176, 0.3);
+    transform: scale(1.1);
+}
+
+/* Scatole Valutazione Generale */
+.eval-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.eval-box input[type="radio"] {
+    display: none;
+}
+
+.box-content {
+    border: 2px solid #cbd5e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.box-content h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.box-content p {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+/* Colori Custom al click delle valutazioni */
+.emer-box input:checked + .box-content {
+    background-color: #fff5f5;
+    border-color: #f56565;
+}
+.emer-box input:checked + .box-content h5 { color: #c53030; }
+
+.dev-box input:checked + .box-content {
+    background-color: #fffff0;
+    border-color: #ecc94b;
+}
+.dev-box input:checked + .box-content h5 { color: #b7791f; }
+
+.cons-box input:checked + .box-content {
+    background-color: #f0fff4;
+    border-color: #48bb78;
+}
+.cons-box input:checked + .box-content h5 { color: #2f855a; }
+
+
+/* Responsive per smartphone */
+@media (max-width: 768px) {
+    .question-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .eval-boxes {
+        grid-template-columns: 1fr; /* Le 3 scatole si impilano in verticale */
+    }
+}
+
+/* =========================================
+   SOTTOMENU LATERALE (Dropdown Sidebar)
+========================================= */
+
+/* Contenitore della voce con sottomenu */
+.has-dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Stile speciale per la voce principale col sottomenu */
+.dropdown-toggle {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Freccia animata */
+.dropdown-toggle .arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+    color: #a0aec0;
+}
+
+/* Wrapper del sottomenu (usa Grid per un'animazione fluida) */
+.submenu-wrapper {
+    display: grid;
+    grid-template-rows: 0fr; /* Chiuso di default */
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Lista interna al sottomenu */
+.submenu {
+    overflow: hidden; /* Nasconde i link quando la riga è 0fr */
+    padding: 0 !important; /* Sovrascrive il padding della sidebar genitore */
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem !important; /* Spazio ridotto tra i sub-link */
+    transition: margin-top 0.3s ease;
+}
+
+/* Link del sottomenu */
+.submenu li {
+    padding-left: 1.5rem; /* Rientranza per far capire che sono figli */
+}
+
+.submenu a {
+    font-size: 0.95rem; /* Font leggermente più piccolo */
+    color: #4a5568;
+    font-weight: 400;
+}
+
+.submenu a:hover {
+    color: var(--primary-color);
+}
+
+/* ---- AZIONE HOVER ---- */
+/* Quando passi sopra l'elemento `has-dropdown`, si apre il sottomenu */
+.has-dropdown:hover .submenu-wrapper {
+    grid-template-rows: 1fr;
+}
+
+/* Aggiunge un po' di margine superiore al sottomenu quando si apre */
+.has-dropdown:hover .submenu {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Ruota la freccia di 180 gradi */
+.has-dropdown:hover .dropdown-toggle .arrow {
+    transform: rotate(180deg);
+    color: var(--primary-color);
+}
