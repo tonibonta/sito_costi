@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const TecnicaPomodoro=(props)=>{
-    const {toggleAccordion,openAccordion,risultato,risposte,risultatoRef}=props;
+    const {toggleAccordion,openAccordion}=props;
 
     return (
         <>
