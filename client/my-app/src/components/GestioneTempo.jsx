@@ -4,6 +4,7 @@ import { ModelloSmart } from './gestione_tempo_components/ModelloSmart';
 import { MatriceEisenhower } from './gestione_tempo_components/MatriceEisenhower';
 import { TecnicaPomodoro } from './gestione_tempo_components/TecnicaPomodoro';
 import { Procastinazione } from './gestione_tempo_components/Procastinazione';
+import { Consigli } from './gestione_tempo_components/Consigli';
 
 
 const GestioneTempo = () => {
@@ -50,6 +51,8 @@ const GestioneTempo = () => {
         <MatriceEisenhower openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
         <TecnicaPomodoro openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
         <Procastinazione openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
+        <Consigli openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
+
         
       </div>
     </>
