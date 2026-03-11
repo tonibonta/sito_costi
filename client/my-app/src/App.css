@@ -405,6 +405,7 @@ footer {
     color: var(--text-color);
     margin-bottom: 1rem;
     text-align: left;
+    
 }
 
 .progress-bar-bg {
@@ -435,6 +436,8 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    overflow-y: scroll;
+    height: 9rem;
 }
 
 .badge {
@@ -444,15 +447,24 @@ footer {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Corretta opacità ombra */
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    
+    /* 1. La bacchetta magica per la fluidità */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    
+    /* 2. Evita sfocature durante l'animazione */
+    backface-visibility: hidden;
 }
 
-.badge.locked {
-    background-color: #f7fafc;
-    color: #a0aec0;
-    border: 1px dashed #cbd5e0;
-    box-shadow: none;
+.badge:hover {
+    transform: scale(1.05);
+    background-color: #bee3f8; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Colonna Destra (Form) */
 .card-title {

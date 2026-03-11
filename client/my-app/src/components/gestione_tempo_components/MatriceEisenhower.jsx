@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const MatriceEisenhower = (props) => {
   const { toggleAccordion, openAccordion } = props;
@@ -27,8 +28,18 @@ const MatriceEisenhower = (props) => {
     // Ecco la tua variabile pronta con i dati dei 4 quadranti!
     console.log("Dati della matrice pronti per il server:", eisenhowerData);
     
-    // Se passi una funzione dal componente padre (es. App.js), puoi chiamarla qui:
-    // if (props.onSave) props.onSave(eisenhowerData);
+ const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_tempo",
+      tipo:"matrice_eisenhower",
+      valore:JSON.stringify(eisenhowerData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    })
+
   };
 
   return (

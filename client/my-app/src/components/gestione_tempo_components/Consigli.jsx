@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const Consigli = (props) => {
   const { toggleAccordion, openAccordion } = props;
@@ -23,9 +24,18 @@ const Consigli = (props) => {
     
     // Ecco la tua variabile pronta con il testo dell'impegno!
     console.log("Dati Consigli pronti per il server:", consigliData);
-    
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(consigliData);
+  const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_tempo",
+      tipo:"consigli",
+      valore:JSON.stringify(consigliData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
+
   };
 
   return (

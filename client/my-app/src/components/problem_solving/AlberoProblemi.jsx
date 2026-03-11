@@ -26,8 +26,17 @@ const AlberoProblemi = (props) => {
     // Ecco la tua variabile pronta con l'analisi dell'Albero!
     console.log("Dati dell'Albero dei Problemi pronti per il server:", alberoData);
     
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(alberoData);
+const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"problem_solving",
+      tipo:"albero_problemi",
+      valore:JSON.stringify(alberoData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

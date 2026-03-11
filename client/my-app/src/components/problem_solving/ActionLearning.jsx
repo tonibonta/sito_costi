@@ -27,9 +27,17 @@ const ActionLearning = (props) => {
     
     // Ecco la tua variabile pronta con le riflessioni del gruppo!
     console.log("Dati Action Learning pronti per il server:", actionData);
-    
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(actionData);
+const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"problem_solving",
+      tipo:"action_learning",
+      valore:JSON.stringify(actionData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
   
   // Array con i 5 scenari proposti per l'Action Learning

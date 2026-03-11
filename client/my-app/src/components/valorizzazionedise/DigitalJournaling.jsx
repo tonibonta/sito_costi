@@ -22,7 +22,17 @@ const DigitalJournaling = ({ toggleAccordion, openAccordion }) => {
     // Ecco il tuo array completo di annotazioni pronto per il database!
     console.log("Dati del Digital Journaling pronti per il server:", entries);
     
-    // Esempio: if (onSave) onSave({ journaling: entries });
+const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"valorizzazione_di_se",
+      tipo:"digital_journaling",
+      valore:JSON.stringify(entries),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

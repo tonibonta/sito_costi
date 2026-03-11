@@ -28,8 +28,17 @@ const DiarioEmotivo = (props) => {
     // Ecco la tua variabile pronta con i dati della pagina del diario!
     console.log("Dati del Diario Emotivo pronti per il server:", diarioData);
     
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(diarioData);
+const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"autoregolazione_emotiva",
+      tipo:"diario_emotivo",
+      valore:JSON.stringify(diarioData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

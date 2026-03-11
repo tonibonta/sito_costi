@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const Procastinazione = (props) => {
   const { toggleAccordion, openAccordion } = props;
@@ -23,9 +24,18 @@ const Procastinazione = (props) => {
     
     // Ecco la tua variabile pronta con il testo della "rana"!
     console.log("Dati Procrastinazione pronti per il server:", procrastinazioneData);
-    
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(procrastinazioneData);
+ const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_tempo",
+      tipo:"procastinazione",
+      valore:JSON.stringify(procrastinazioneData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    })
+
   };
 
   return (

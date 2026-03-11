@@ -23,9 +23,17 @@ const GoalSetter = ({ toggleAccordion, openAccordion }) => {
     
     // Ecco la tua variabile pronta con l'obiettivo SMART!
     console.log("Dati del Goal Setter pronti per il server:", goal);
-    
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(goal);
+    const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"orientamento_obiettivo",
+      tipo:"goalsetter",
+      valore:JSON.stringify(goal),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

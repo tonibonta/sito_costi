@@ -28,9 +28,17 @@ const CinquePerche = (props) => {
     
     // Ecco la tua variabile pronta con l'analisi completa!
     console.log("Dati de I Cinque Perché pronti per il server:", percheData);
-    
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(percheData);
+const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"problem_solving",
+      tipo:"cinque_perche",
+      valore:JSON.stringify(percheData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

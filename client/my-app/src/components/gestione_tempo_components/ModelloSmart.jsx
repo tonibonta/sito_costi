@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import API from '../API';
 const ModelloSmart = (props) => {
   const { toggleAccordion, openAccordion } = props;
 
@@ -23,13 +23,23 @@ const ModelloSmart = (props) => {
 
   // 3. Funzione che intercetta il salvataggio (qui farai la chiamata al server)
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita il ricaricamento della pagina
+    e.preventDefault(); 
     
     // Qui hai la tua variabile pronta con tutte le risposte!
     console.log("Dati pronti per essere inviati al server:", smartData);
-    
-    // Esempio: se ricevi una funzione 'onSave' tramite props, la chiami qui:
-    // if (props.onSave) props.onSave(smartData);
+    const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_tempo",
+      tipo:"modello_smart",
+      valore:JSON.stringify(smartData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    })
+
+  
   };
 
   return (

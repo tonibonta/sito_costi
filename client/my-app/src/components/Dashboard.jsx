@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState} from 'react';
+
 
 
 const Dashboard = () => {
+
+  const [selezione,setSelezione]=useState('dati_personali');
   // Imposta il titolo della scheda del browser
   useEffect(() => {
     document.title = "Profilo Utente - Soft Skills Rehab UniTo";
@@ -33,31 +36,26 @@ const Dashboard = () => {
               <h3>Mario Rossi</h3>
               <p className="user-role">Studente - Fisioterapia</p>
               <p className="user-id">Matricola: <strong>876543</strong></p>
-
-              {/* Tag hr chiuso properly */}
-              <hr className="divider" />
-
-              <div className="progress-section">
-                <h4>Completamento Percorso</h4>
-                <div className="progress-bar-bg">
-                  {/* Stile inline convertito in oggetto JavaScript */}
-                  <div className="progress-bar-fill" style={{ width: '65%' }}></div>
-                </div>
-                <p className="progress-text">65% completato</p>
-              </div>
-
+              <button className="badge">Dati personali</button>
+       
               <hr className="divider" />
 
               <div className="badges-section">
-                <h4>Competenze Sbloccate</h4>
+                <h4>Attività</h4>
                 <div className="badges-container">
-                  <span className="badge" title="Hai completato il modulo sul Problem Solving">🧩 Problem Solving</span>
-                  <span className="badge" title="Hai completato il modulo sul Teamwork">🤝 Teamwork</span>
-                  <span className="badge locked" title="Ancora da completare">⏳ Gestione Tempo</span>
+                  <button className="badge">Gestione tempo</button>
+                  <button className="badge">Problem Solving</button>
+                  <button className="badge">Autoregolazione emotiva</button>
+                  <button className="badge">Valorizzazione di sè</button>
+                  <button className="badge">Orientamento all'obiettivo</button>
+         
+
+
                 </div>
               </div>
             </div>
           </div>
+          
 
           {/* Colonna Destra: Form di Modifica Dati */}
           <div className="profile-main">

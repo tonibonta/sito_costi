@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import API from '../API';
 
 const AutovalutazioneGestioneTempo = (props) => {
   const [risultato, setRisultato] = useState(null); 
@@ -75,6 +76,19 @@ const AutovalutazioneGestioneTempo = (props) => {
     // 4. Aggiorna lo stato per mostrare il risultato
     setRisultato(categoriaFinale);
     console.log(categoriaFinale);
+
+     const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_tempo",
+      tipo:"questionario_autovalutativo",
+      valore:categoriaFinale,
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
+
   };
 
   return (

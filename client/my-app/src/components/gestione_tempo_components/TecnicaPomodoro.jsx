@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const TecnicaPomodoro = (props) => {
   const { toggleAccordion, openAccordion } = props;
@@ -25,8 +26,18 @@ const TecnicaPomodoro = (props) => {
     // Ecco la variabile con i dati della Tecnica del Pomodoro!
     console.log("Dati Pomodoro pronti per il server:", pomodoroData);
     
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(pomodoroData);
+  const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_tempo",
+      tipo:"tecnica_pomodoro",
+      valore:JSON.stringify(pomodoroData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    })
+
   };
 
   return (

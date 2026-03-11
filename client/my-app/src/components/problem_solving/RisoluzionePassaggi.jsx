@@ -29,8 +29,17 @@ const RisoluzionePassaggi = (props) => {
     // Ecco la tua variabile pronta con il piano d'azione!
     console.log("Dati del Problem Solving in 6 passaggi pronti per il server:", stepData);
     
-    // Se passi una funzione dal componente padre, la chiami qui:
-    // if (props.onSave) props.onSave(stepData);
+const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"probelm_solving",
+      tipo:"risoluzione_passaggi",
+      valore:JSON.stringify(stepData),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   const stepsArray = [
