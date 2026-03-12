@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DiarioEmotivo } from './autoregolazione_emotiva/DiarioEmotivo';
 import { Mindfulness } from './autoregolazione_emotiva/Mindfullness';
 import { Coping } from './autoregolazione_emotiva/Coping';
+import { CopingStrategie } from './autoregolazione_emotiva/CopingStrategie';
 import { Biofeedback } from './autoregolazione_emotiva/Biofeedback';
 
 
@@ -11,6 +12,7 @@ const AutoregolazioneEmotiva=()=> {
   const [openAccordion, setOpenAccordion] = useState({
     biofeedback: false,
     coping: false,
+    copingstrategie:false,
     diarioemotivo: false,
     mindfullness: false
 
@@ -42,6 +44,8 @@ const AutoregolazioneEmotiva=()=> {
        <Biofeedback openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
        <Mindfulness openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
        <Coping openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <CopingStrategie openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+
        
 
 

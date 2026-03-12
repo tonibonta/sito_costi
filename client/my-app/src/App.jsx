@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import { Home_layout,Dashboard_layout, GestioneTempo_layout, ProblemSolving_layout, AutoregolazioneEmotiva_layout, ValorizzazioneDiSe_layout, OrientamentoObiettivo_layout, Intraprendenza_layout, AttribuzioneCausale_layout } from './components/Layout'
+import { Home_layout,Dashboard_layout, GestioneTempo_layout, 
+  ProblemSolving_layout, AutoregolazioneEmotiva_layout, 
+  ValorizzazioneDiSe_layout, OrientamentoObiettivo_layout,
+   Intraprendenza_layout, AttribuzioneCausale_layout, Resilienza_layout,
+    LavoriInGruppo_layout, 
+    Comunicazione_layout,
+    GestioneConflitti_layout} from './components/Layout'
 
 import {Routes ,Route,useLocation ,useNavigate,Navigate } from 'react-router'
 import './App.css'
@@ -41,6 +47,18 @@ function App() {
       }></Route>
        <Route path='/' element={
         <Home_layout/>
+      }></Route>
+         <Route path='/resilienza' element={
+        <Resilienza_layout/>
+      }></Route>
+        <Route path='/lavoriingruppo' element={
+        <LavoriInGruppo_layout/>
+      }></Route>
+       <Route path='/comunicazione' element={
+        <Comunicazione_layout/>
+      }></Route>
+       <Route path='/gestioneconflitto' element={
+        <GestioneConflitti_layout/>
       }></Route>
       
 

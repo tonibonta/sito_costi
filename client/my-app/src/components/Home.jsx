@@ -16,7 +16,7 @@ const Home = () => {
       <section className="info-section">
         <h3>Cosa sono le Soft Skills?</h3>
         <p>
-          «Abilità intra ed inter personali di tipo socio emotivo importanti per lo sviluppo personale, la partecipazione sociale e il successo lavorativo [...]» (Kechagias, 2011)
+          «Abilità intra ed inter personali di tipo socio emotivo importanti per lo sviluppo personale, la partecipazione sociale e il successo lavorativo [...]» (Kechagias)
         </p>
       </section>
 

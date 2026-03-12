@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 // ATTIVITÀ 1: Scelte a Bivio
-export const ScelteBivio = ({ toggleAccordion, openAccordion }) => {
+export const ScelteBivio = (props) => {
+  const { toggleAccordion, openAccordion }=props;
   const [step, setStep] = useState(0);
   const [feedback, setFeedback] = useState(null); // Stato per il messaggio di feedback
 
@@ -28,7 +29,7 @@ export const ScelteBivio = ({ toggleAccordion, openAccordion }) => {
       msg: proattivo ? "Ottima scelta! L'intraprendenza paga." : "Cerca di essere più proattivo la prossima volta!",
       color: proattivo ? "#38a169" : "#e53e3e"
     });
-
+  
     // Cambiamo scenario dopo un breve delay per far leggere il feedback
     setTimeout(() => {
       setFeedback(null);
@@ -50,7 +51,7 @@ export const ScelteBivio = ({ toggleAccordion, openAccordion }) => {
         <span className="toggle-icon">{openAccordion.sceltebivio ? '−' : '+'}</span>
       </div>
       <div className="accordion-content">
-        <div className="accordion-inner" style={{ textAlign: 'center', minHeight: '200px', position: 'relative' }}>
+        <div className="accordion-inner" style={{ textAlign: 'center', position: 'relative' }}>
           
           {/* Box Scenario */}
           <div style={{ padding: '10px', backgroundColor: '#edf2f7', borderRadius: '10px', marginBottom: '10px' }}>
