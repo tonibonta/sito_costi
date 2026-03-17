@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const ActionLearning = (props) => {
   const { toggleAccordion, openAccordion } = props;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import API from '../API';
 // ATTIVITÀ 1: Goal Setter (Metodo SMART)
 const GoalSetter = ({ toggleAccordion, openAccordion }) => {
   // 1. Stato per memorizzare i dati dell'obiettivo
@@ -27,7 +27,7 @@ const GoalSetter = ({ toggleAccordion, openAccordion }) => {
     const attivita={
       date:ora,
       classe:"orientamento_obiettivo",
-      tipo:"goalsetter",
+      tipo:"goal_setter",
       valore:JSON.stringify(goal),
       id_user:1
     }

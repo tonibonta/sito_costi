@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
-
  const Comunicazione = () => {
   const[openAccordion, setOpenAccordion] = useState({
     assiomi: false,

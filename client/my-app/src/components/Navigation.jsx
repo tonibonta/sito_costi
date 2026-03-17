@@ -88,6 +88,7 @@ const Navigation = (props) => {
             </button>
           </div>
           <ul>
+            <li><Link to="/storico">Storico</Link></li>
             <li><Link to="/gestione-tempo">Gestione del Tempo</Link></li>
             <li><Link to="/problem-solving">Problem Solving</Link></li>
             <li><Link to="/autoregolazione-emotiva">Autoregolazione emotiva</Link></li>
@@ -99,6 +100,8 @@ const Navigation = (props) => {
             <li><Link to="/lavoriingruppo">Lavoro in gruppo</Link></li>
             <li><Link to="/comunicazione">Comunicazione</Link></li>
             <li><Link to="/gestioneconflitto">Gestione del conflitto</Link></li>
+            
+
           </ul>
         </nav>
       </Container>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const SfideGiornaliere = (props) => {
   const { toggleAccordion, openAccordion } = props;
@@ -31,6 +32,16 @@ const SfideGiornaliere = (props) => {
 
   const segnaCompletata = () => {
     setCompletata(true);
+    const attivita={
+      date:ora,
+      classe:"resilienza",
+      tipo:"sfide_giornaliere",
+      valore:JSON.stringify({"sfidaAttuale":sfidaAttuale}),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

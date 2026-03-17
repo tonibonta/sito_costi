@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API from '../API';
 
 const Biofeedback=(props)=> {
 const {toggleAccordion,openAccordion}=props;

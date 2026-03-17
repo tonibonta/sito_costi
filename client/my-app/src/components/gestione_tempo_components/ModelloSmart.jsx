@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 const ModelloSmart = (props) => {
-  const { toggleAccordion, openAccordion } = props;
-
+  const toggleAccordion = (id) => {
+    setOpenAccordion(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+   const [openAccordion, setOpenAccordion] = useState({
+       smart:  false
+     });
+  const location =useLocation()
   // 1. Creiamo lo stato per memorizzare i dati del form
-  const [smartData, setSmartData] = useState({
+  const [smartData, setSmartData] = useState(props.val==null?{
     smart_s: '',
     smart_m: '',
     smart_a: '',
     smart_r: '',
     smart_t: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente scrive
   const handleInputChange = (e) => {
@@ -49,7 +58,7 @@ const ModelloSmart = (props) => {
         <div className="accordion-header" onClick={() => toggleAccordion('smart')}>
           <div className="header-title">
             <span className="icon">🎯</span>
-            <h3>Modello SMART</h3>
+            <h3>Modello SMART  {(location.pathname==="/storico")?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.smart ? '−' : '+'}</span>
         </div>
@@ -88,6 +97,7 @@ const ModelloSmart = (props) => {
                   placeholder="Es: Voglio studiare tutti i muscoli dell'arto superiore..."
                   value={smartData.smart_s}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 ></textarea>
               </div>
 
@@ -101,6 +111,8 @@ const ModelloSmart = (props) => {
                   placeholder="Es: Capirò di avercela fatta quando saprò ripetere origine e inserzione di ogni muscolo senza guardare il libro."
                   value={smartData.smart_m}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
 
@@ -114,6 +126,8 @@ const ModelloSmart = (props) => {
                   placeholder="Es: Sì, ho gli appunti completi e dedicherò 2 ore al giorno allo studio."
                   value={smartData.smart_a}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
 
@@ -127,6 +141,8 @@ const ModelloSmart = (props) => {
                   placeholder="Es: È fondamentale per poter passare l'esame di Anatomia questo semestre."
                   value={smartData.smart_r}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
 
@@ -140,14 +156,17 @@ const ModelloSmart = (props) => {
                   placeholder="Es: Entro venerdì 15 alle ore 18:00."
                   value={smartData.smart_t}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
-
+              {location.pathname!=="/storico"?
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#ed8936', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva il tuo Obiettivo
                 </button>
               </div>
+  :""}
             </form>
           </div>
         </div>

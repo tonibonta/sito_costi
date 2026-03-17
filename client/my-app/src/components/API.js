@@ -12,6 +12,17 @@ console.log(data);
 return data;
 }
 
+const getAll=async()=>{
+  const request =`${SERVER_URL}attivita`;
+   const response=await fetch(request,{method: 'GET',headers: {
+    'Content-Type': 'application/json',
+  }});
+const data = await response.json();
 
-const API={storeAttivita};
+return data;
+  
+}
+
+
+const API={storeAttivita,getAll};
 export default API;

@@ -562,13 +562,13 @@ footer {
 
 /* Blocco principale */
 .accordion-item {
+    
     background-color: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     margin-bottom: 1.5rem;
     overflow: hidden; /* Importante per l'animazione */
 }
-
 /* Header cliccabile */
 .accordion-header {
     display: flex;
@@ -618,15 +618,25 @@ footer {
 .accordion-item.active .accordion-content {
     grid-template-rows: 1fr; /* Si apre fluidamente */
 }
+.accordion-content {
+    display: grid;
+    grid-template-rows: 0fr; /* Chiuso di default */
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #fafbfc;
+}
+
+
 
 .accordion-inner {
     overflow: hidden; /* Nasconde il contenuto mentre è chiuso */
     padding: 0 2rem; /* Il padding Y verrà applicato sotto per non rompere l'animazione */
+    min-height: 0;
 }
 
 .accordion-item.active .accordion-inner {
     padding: 0 2rem 2rem 2rem;
 }
+
 
 /* Stili Istruzioni */
 .instruction-box {

@@ -5,7 +5,8 @@ import { Home_layout,Dashboard_layout, GestioneTempo_layout,
    Intraprendenza_layout, AttribuzioneCausale_layout, Resilienza_layout,
     LavoriInGruppo_layout, 
     Comunicazione_layout,
-    GestioneConflitti_layout} from './components/Layout'
+    GestioneConflitti_layout,
+    Storico_layout} from './components/Layout'
 
 import {Routes ,Route,useLocation ,useNavigate,Navigate } from 'react-router'
 import './App.css'
@@ -60,6 +61,11 @@ function App() {
        <Route path='/gestioneconflitto' element={
         <GestioneConflitti_layout/>
       }></Route>
+ 
+       <Route path='/storico' element={
+        <Storico_layout/>
+      }></Route>
+      
       
 
     </Routes>

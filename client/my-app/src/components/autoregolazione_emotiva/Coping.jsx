@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const Coping = (props) => {
   const { toggleAccordion, openAccordion } = props;

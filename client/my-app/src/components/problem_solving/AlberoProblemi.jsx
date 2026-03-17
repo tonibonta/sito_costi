@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const AlberoProblemi = (props) => {
   const { toggleAccordion, openAccordion } = props;

@@ -20,6 +20,7 @@ app.use(cors(corsOptions));
 app.get('/api/attivita',(req,res)=>{
     attivitadao.getAll().then((attivita)=>{
         console.log(attivita);
+        res.send(attivita)
     })
     
 });

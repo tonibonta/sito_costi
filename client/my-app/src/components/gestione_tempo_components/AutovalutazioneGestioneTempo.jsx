@@ -1,16 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router-dom';
+
 
 const AutovalutazioneGestioneTempo = (props) => {
-  const [risultato, setRisultato] = useState(null); 
+  const location=useLocation();
+  const [risultato, setRisultato] = useState(props.val!=null?props.val.valore:null); 
   const [risposte, setRisposte] = useState({});
   const risultatoRef = useRef(null);
-  const { toggleAccordion, openAccordion } = props;
-
+  const [openAccordion, setOpenAccordion] = useState({
+      tempo:  false
+    });
+const toggleAccordion = (id) => {
+    setOpenAccordion(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
   useEffect(() => {
+    
     if (risultato && risultatoRef.current) {
       risultatoRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+
   }, [risultato]);
 
   const domande = [
@@ -97,7 +109,7 @@ const AutovalutazioneGestioneTempo = (props) => {
         <div className="accordion-header" onClick={() => toggleAccordion('tempo')}>
           <div className="header-title">
             <span className="icon">⏱️</span>
-            <h3>Questionario autovalutativo</h3>
+            <h3>Questionario autovalutativo {(location.pathname==="/storico")?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.tempo ? '−' : '+'}</span>
         </div>
@@ -112,8 +124,9 @@ const AutovalutazioneGestioneTempo = (props) => {
             )}
 
             {/* Aggiunto l'evento onSubmit al form */}
+            
             <form onSubmit={calcolaRisultato} className="questionnaire-form">
-              
+              { (location.pathname!=="/storico") ?
               <div className="questions-list">
                 {domande.map((domanda, index) => {
                   const qNum = index + 1;
@@ -140,7 +153,7 @@ const AutovalutazioneGestioneTempo = (props) => {
                   );
                 })}
               </div>
-
+                :""}
               <hr className="divider" />
 
               <div className="evaluation-section" id="risultato-sezione" ref={risultatoRef}>
@@ -190,14 +203,15 @@ const AutovalutazioneGestioneTempo = (props) => {
                   </label>
                 </div>
               </div>
-
+              {location.pathname!=="/storico"?
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 <button type="submit" className="btn btn-primary">
                   {risultato ? 'Ricalcola Risultato' : 'Calcola il mio Risultato'}
                 </button>
               </div>
-
+                :""}
             </form>
+   
           </div>
         </div>
       </div>

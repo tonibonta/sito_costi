@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-
+import API from './API';
 
 export const GestioneConflitto = () => {
   const[openAccordion, setOpenAccordion] = useState({
@@ -119,6 +119,17 @@ const QuestionarioConflitti = (props) => {
     const classifica = Object.entries(punteggi).sort((a, b) => b[1] - a[1]);
 
     setRisultato({ punteggi: classifica, dominanti: stiliDominanti, maxPunteggio });
+     const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"gestione_conflitto",
+      tipo:"questionario_conflitto",
+      valore:JSON.stringify(risultato),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (

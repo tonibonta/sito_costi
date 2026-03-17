@@ -27,7 +27,7 @@ const GestioneTempo = () => {
     
   }, );
 
-  // Funzione per alternare lo stato degli accordion
+
   const toggleAccordion = (id) => {
     setOpenAccordion(prev => ({
       ...prev,
@@ -45,7 +45,7 @@ const GestioneTempo = () => {
           <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Gestione del Tempo</h2>
           <p style={{ color: '#718096', fontSize: '1.1rem' }}>Valuta le tue competenze e scopri il tuo livello.</p>
         </div>
-        <AutovalutazioneGestioneTempo openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
+        <AutovalutazioneGestioneTempo  />
         <ModelloSmart openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
 
         <MatriceEisenhower openAccordion={openAccordion} toggleAccordion={toggleAccordion} />

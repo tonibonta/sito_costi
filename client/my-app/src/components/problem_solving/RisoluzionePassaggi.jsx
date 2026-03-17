@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../API';
 
 const RisoluzionePassaggi = (props) => {
   const { toggleAccordion, openAccordion } = props;
@@ -32,7 +33,7 @@ const RisoluzionePassaggi = (props) => {
 const ora = new Date();
     const attivita={
       date:ora,
-      classe:"probelm_solving",
+      classe:"problem_solving",
       tipo:"risoluzione_passaggi",
       valore:JSON.stringify(stepData),
       id_user:1
