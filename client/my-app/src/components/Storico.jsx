@@ -263,10 +263,10 @@ const Storico = () => {
        {categoria.filter(val=>val.tipo==="diario_emotivo").map(val=>{
                     return  <DiarioEmotivo val={val}/>
                 })}
-                {categoria.filter(val=>val.tipo==="coping").map(val=>{
+                {categoria.filter(val=>val.tipo==="coping_questionario").map(val=>{
                     return  <Coping val={val}/>
                 })}
-                {categoria.filter(val=>val.tipo==="coping_strategie").map(val=>{
+                {categoria.filter(val=>val.tipo==="coping_sfide").map(val=>{
                     return  <CopingStrategie val={val}/>
                 })}
         

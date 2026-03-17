@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 
 const CopingStrategie = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+  const location=useLocation();
+ 
+const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      copingstrategie:  false
+    });
 
   const [risposte, setRisposte] = useState({});
-  const[risultato, setRisultato] = useState(null);
+  const[risultato, setRisultato] = useState(props.val==null?null:JSON.parse(props.val.valore));
 
   // Struttura dati: Scenari con relative opzioni e punteggi
   const sfide =[
@@ -89,6 +100,21 @@ const CopingStrategie = (props) => {
     }
 
     setRisultato({ punteggioTotale, profilo, descrizione });
+     const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"autovalutazione_emotiva",
+      tipo:"coping_sfide",
+      valore:JSON.stringify({
+        "punteggioTotale":punteggioTotale,
+        "profilo":profilo,
+        "descrizione":descrizione
+      }),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (
@@ -96,7 +122,8 @@ const CopingStrategie = (props) => {
       <div className="accordion-header" onClick={() => toggleAccordion('copingstrategie')}>
         <div className="header-title">
           <span className="icon">⚡</span>
-          <h3>Coping: Simulazione Sfide Stressanti</h3>
+          <h3>Coping: Simulazione Sfide Stressanti {(location.pathname==="/storico" && props.val!==null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}
+</h3>
         </div>
         <span className="toggle-icon">{openAccordion?.copingstrategie ? '−' : '+'}</span>
       </div>
@@ -111,7 +138,8 @@ const CopingStrategie = (props) => {
           </div>
 
           <form onSubmit={calcolaRisultato} style={{ marginTop: '2rem' }}>
-            {sfide.map((sfida, i) => (
+
+            {location.pathname!=="/storico"?sfide.map((sfida, i) => (
               <div key={i} style={{ marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid #edf2f7' }}>
                 <p style={{ fontWeight: '600', marginBottom: '1rem', color: '#2d3748', fontSize: '1.05rem' }}>
                   Sfida {i + 1}: {sfida.scenario}
@@ -132,7 +160,7 @@ const CopingStrategie = (props) => {
                   ))}
                 </div>
               </div>
-            ))}
+            )):""}
 
             {risultato && (
               <div style={{ backgroundColor: '#e6fffa', padding: '1.5rem', borderRadius: '8px', marginTop: '2rem', border: '2px solid #319795' }}>
@@ -153,9 +181,11 @@ const CopingStrategie = (props) => {
             )}
 
             <div style={{ marginTop: '2rem', textAlign: 'right' }}>
+              {location.pathname!=="/storico"?
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#d69e2e', border: 'none', padding: '0.75rem 1.5rem', color: 'white', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer' }}>
                 Calcola la tua Efficacia
               </button>
+              :""}
             </div>
           </form>
         </div>

@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 
 const Coping = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+  const location=useLocation();
+const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      coping:  false
+    });
+
 
   const [risposte, setRisposte] = useState({});
-  const [risultato, setRisultato] = useState(null);
+  const [risultato, setRisultato] = useState(props.val==null?null:{
+    "strategiaDominante":JSON.parse(JSON.parse(props.val.valore).strategia),
+    "macroDominante":JSON.parse(JSON.parse(props.val.valore).macrodom),
+    "macroClassi":JSON.parse(JSON.parse(props.val.valore).macroclassi),
+
+  });
 
   const domande =[
     "Mi applico al lavoro o ad altre attività sostitutive per distogliere la mia mente dagli eventi",
@@ -107,6 +123,22 @@ const Coping = (props) => {
       macroDominante,
       macroClassi
     });
+
+     const ora = new Date();
+    const attivita={
+      date:ora,
+      classe:"autoregolazione_emotiva",
+      tipo:"coping_questionario",
+      valore:JSON.stringify({
+        "strategia":JSON.stringify(strategiaDominante),
+        "macrodom":JSON.stringify(macroDominante),
+        "macroclassi":JSON.stringify(macroClassi)}
+      ),
+      id_user:1
+    }
+    API.storeAttivita(attivita).then((data)=>{
+      console.log(data);
+    });
   };
 
   return (
@@ -114,7 +146,7 @@ const Coping = (props) => {
       <div className="accordion-header" onClick={() => toggleAccordion('coping')}>
         <div className="header-title">
           <span className="icon">🛡️</span>
-          <h3>Coping:questionario</h3>
+          <h3>Coping:questionario {(location.pathname==="/storico" && props.val!==null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
         </div>
         <span className="toggle-icon">{openAccordion?.coping ? '−' : '+'}</span>
       </div>
@@ -129,7 +161,8 @@ const Coping = (props) => {
           </div>
 
           <form onSubmit={calcolaRisultato} style={{ marginTop: '2rem' }}>
-            {domande.map((dom, i) => (
+            {location.pathname!=="/storico"?
+            domande.map((dom, i) => (
               <div key={i} style={{ marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #edf2f7' }}>
                 <p style={{ fontWeight: '500', marginBottom: '0.5rem' }}>{i + 1}. {dom}</p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
@@ -141,7 +174,7 @@ const Coping = (props) => {
                   ))}
                 </div>
               </div>
-            ))}
+            )):""}
 
             {risultato && (
               <div style={{ backgroundColor: '#c6f6d5', padding: '1.5rem', borderRadius: '8px', marginTop: '2rem', border: '2px solid #38a169' }}>
@@ -179,11 +212,13 @@ const Coping = (props) => {
                 </p>
               </div>
             )}
-
+            
             <div style={{ marginTop: '2rem', textAlign: 'right' }}>
+              {location.pathname!=="/storico"?
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#d69e2e', border: 'none', padding: '0.75rem 1.5rem', color: 'white', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer' }}>
                 Scopri il tuo Stile
               </button>
+              :""} 
             </div>
           </form>
         </div>

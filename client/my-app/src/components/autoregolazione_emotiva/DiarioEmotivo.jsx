@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 
 const DiarioEmotivo = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+
+  const location=useLocation();
+ const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      diarioemotivo:  false
+    });
+
 
   // 1. Creiamo lo stato per memorizzare i dati del Diario Emotivo
-  const [diarioData, setDiarioData] = useState({
+  const [diarioData, setDiarioData] = useState(props.val==null?{
     diario_evento: '',
     diario_quando: '',
     diario_dove: '',
     diario_emozione: '',
     diario_reazione: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -47,7 +59,7 @@ const ora = new Date();
       <div className="accordion-header" onClick={() => toggleAccordion('diarioemotivo')}>
         <div className="header-title">
           <span className="icon">📖</span>
-          <h3>Diario Emotivo</h3>
+          <h3>Diario Emotivo  {(location.pathname==="/storico" && props.val!==null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
         </div>
         <span className="toggle-icon">{openAccordion?.diarioemotivo ? '−' : '+'}</span>
       </div>
@@ -71,6 +83,10 @@ const ora = new Date();
                   rows="2" 
                   style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px' }} 
                   placeholder="Descrivi brevemente l'evento..."
+
+
+                disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
               
@@ -84,6 +100,8 @@ const ora = new Date();
                     onChange={handleInputChange}
                     style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px' }} 
                     placeholder="Es. Ieri pomeriggio" 
+                disabled={location.pathname==="/storico"?true:false}
+
                   />
                 </div>
                 <div>
@@ -93,6 +111,8 @@ const ora = new Date();
                     name="diario_dove"
                     value={diarioData.diario_dove}
                     onChange={handleInputChange}
+                disabled={location.pathname==="/storico"?true:false}
+
                     style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px' }} 
                     placeholder="Es. In reparto, a casa..." 
                   />
@@ -108,6 +128,8 @@ const ora = new Date();
                   onChange={handleInputChange}
                   style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px' }} 
                   placeholder="Es. Rabbia, Tristezza, Frustrazione, Gioia (1-2 parole)" 
+                disabled={location.pathname==="/storico"?true:false}
+
                 />
               </div>
 
@@ -120,15 +142,19 @@ const ora = new Date();
                   rows="2" 
                   style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px' }} 
                   placeholder="Come hai reagito all'emozione?"
+                disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
             </div>
 
             <div style={{ marginTop: '1.5rem', textAlign: 'right' }}>
               {/* Cambiato type="button" in type="submit" */}
+              {location.pathname!=="/storico"?
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3182ce', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                 Salva Pagina del Diario
               </button>
+              :""}
             </div>
           </form>
         </div>
