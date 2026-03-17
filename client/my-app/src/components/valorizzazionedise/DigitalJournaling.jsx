@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import API from '../API';
 
 // ATTIVITÀ 1: Digital Journaling
-const DigitalJournaling = ({ toggleAccordion, openAccordion }) => {
+const DigitalJournaling = (props) => {
+  
+  const location=useLocation()
   // 1. Stato per l'array di tutte le annotazioni (quello che invieremo al server)
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState(props.val==null?[]:JSON.parse(props.val.valore));
   // Stato temporaneo per gestire il campo di testo mentre l'utente digita
   const [newEntry, setNewEntry] = useState('');
+   const [openAccordion, setOpenAccordion] = useState({
+        digitaljournaling:  false
+      });
+
+  const toggleAccordion = (id) => {
+      setOpenAccordion(prev => ({
+        ...prev,
+        [id]: !prev[id]
+      }));
+    };
 
   // 2. Aggiunge temporaneamente la nota alla lista locale
   const handleAddEntry = () => {
@@ -40,7 +54,7 @@ const ora = new Date();
       <div className="accordion-header" onClick={() => toggleAccordion('digitaljournaling')}>
         <div className="header-title">
           <span className="icon">📖</span>
-          <h3>Digital Journaling</h3>
+          <h3>Digital Journaling  {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
         </div>
         <span className="toggle-icon">{openAccordion?.digitaljournaling ? '−' : '+'}</span>
       </div>
@@ -51,6 +65,7 @@ const ora = new Date();
           
           {/* Aggiunto il form per gestire l'invio finale al server */}
           <form onSubmit={handleSubmit}>
+            {location.pathname!=="/storico"?
             <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem' }}>
               <input 
                 type="text" 
@@ -69,6 +84,7 @@ const ora = new Date();
                 Aggiungi
               </button>
             </div>
+            :""}
             
             <ul style={{ listStyleType: 'none', padding: 0 }}>
               {entries.map((entry, index) => (
@@ -80,11 +96,13 @@ const ora = new Date();
             </ul>
 
             {/* Mostra il pulsante di salvataggio finale solo se ci sono annotazioni */}
+
             {entries.length > 0 && (
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+                {location.pathname!=="/storico"?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2c7a7b', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva il Diario nel Database
-                </button>
+                </button>:""}
               </div>
             )}
           </form>
