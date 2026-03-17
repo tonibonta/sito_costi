@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router-dom';
+
 // ATTIVITÀ 1: Goal Setter (Metodo SMART)
-const GoalSetter = ({ toggleAccordion, openAccordion }) => {
+const GoalSetter = () => {
   // 1. Stato per memorizzare i dati dell'obiettivo
   const [goal, setGoal] = useState({ vago: '', S: '', M: '', A: '', R: '', T: '' });
   const [showCard, setShowCard] = useState(false);
-
+   const [openAccordion, setOpenAccordion] = useState({
+          goalsetter:  false
+        });
+  
+    const toggleAccordion = (id) => {
+        setOpenAccordion(prev => ({
+          ...prev,
+          [id]: !prev[id]
+        }));
+      };
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
     const { name, value } = e.target;
