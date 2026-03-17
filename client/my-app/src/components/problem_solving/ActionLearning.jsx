@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 
 const ActionLearning = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+ const location=useLocation();
 
+const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      action:  false
+    });
   // 1. Creiamo lo stato per memorizzare i dati dei 5 scenari
-  const [actionData, setActionData] = useState({
+  const [actionData, setActionData] = useState(props.val==null?{
     scenario_1: '',
     scenario_2: '',
     scenario_3: '',
     scenario_4: '',
     scenario_5: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -56,7 +66,8 @@ const ora = new Date();
       <div className="accordion-header" onClick={() => toggleAccordion('action')}>
         <div className="header-title">
           <span className="icon">👥</span>
-          <h3>Action Learning</h3>
+          <h3>Action Learning {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}
+ </h3>
         </div>
         <span className="toggle-icon">{openAccordion?.action ? '−' : '+'}</span>
       </div>
@@ -100,6 +111,9 @@ const ora = new Date();
                       placeholder="Quali domande vi ponete? Quali informazioni mancano? Come agireste come team?"
                       value={actionData[fieldName]}
                       onChange={handleInputChange}
+
+
+                    disabled={location.pathname==="/storico"?true:false}
                     ></textarea>
                   </div>
                 );
@@ -108,9 +122,11 @@ const ora = new Date();
             </div>
 
             <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+              {location.pathname!=="/storico"?
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#d53f8c', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                 Salva Riflessioni di Gruppo
               </button>
+              :""}
             </div>
 
           </form>

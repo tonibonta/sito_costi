@@ -2,13 +2,22 @@ import React, { useState } from 'react';
 import API from '../API';
 
 const TecnicaPomodoro = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      pomodoro:  false
+    });
+
 
   // 1. Creiamo lo stato per memorizzare i dati della pianificazione
-  const [pomodoroData, setPomodoroData] = useState({
+  const [pomodoroData, setPomodoroData] = useState(props.val==null?{
     pomo_settimana: '',
     pomo_oggi: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -47,7 +56,8 @@ const TecnicaPomodoro = (props) => {
         <div className="accordion-header" onClick={() => toggleAccordion('pomodoro')}>
           <div className="header-title">
             <span className="icon">🍅</span>
-            <h3>Tecnica del Pomodoro</h3>
+            <h3>Tecnica del Pomodoro  {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}
+</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.pomodoro ? '−' : '+'}</span>
         </div>
@@ -82,6 +92,7 @@ const TecnicaPomodoro = (props) => {
                   placeholder="Es: Devo completare lo studio del capitolo 4 e 5 di Fisiologia."
                   value={pomodoroData.pomo_settimana}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 ></textarea>
               </div>
 
@@ -95,14 +106,18 @@ const TecnicaPomodoro = (props) => {
                   placeholder="Es: - Pomodoro 1 (25m): Leggere prime 10 pagine..."
                   value={pomodoroData.pomo_oggi}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 ></textarea>
               </div>
 
+
+{location.pathname!=="/storico"?
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#e53e3e', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva Pianificazione
                 </button>
               </div>
+              :""}
             </form>
           </div>
         </div>

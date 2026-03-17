@@ -53,7 +53,9 @@ header {
 .nav-container {
     display: flex;
     align-items: center;
-    max-width: 1200px;
+    padding-left: 2%;
+    padding-right: 2%;
+
     margin: 0 auto;
 }
 

@@ -109,7 +109,7 @@ const toggleAccordion = (id) => {
         <div className="accordion-header" onClick={() => toggleAccordion('tempo')}>
           <div className="header-title">
             <span className="icon">⏱️</span>
-            <h3>Questionario autovalutativo {(location.pathname==="/storico")?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
+            <h3>Questionario autovalutativo {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.tempo ? '−' : '+'}</span>
         </div>

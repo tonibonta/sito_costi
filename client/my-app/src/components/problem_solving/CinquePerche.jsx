@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import API from '../API';
 const CinquePerche = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+  const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      cinquePerche:  false
+    });
+
 
   // 1. Creiamo lo stato per memorizzare i dati del form
-  const [percheData, setPercheData] = useState({
+  const [percheData, setPercheData] = useState(props.val==null?{
     p_problema: '',
     p_1: '',
     p_2: '',
     p_3: '',
     p_4: '',
     p_5: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -48,7 +57,7 @@ const ora = new Date();
         <div className="accordion-header" onClick={() => toggleAccordion('cinquePerche')}>
           <div className="header-title">
             <span className="icon">🔍</span>
-            <h3>I Cinque Perché</h3>
+            <h3>I Cinque Perché {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.cinquePerche ? '−' : '+'}</span>
         </div>
@@ -85,6 +94,7 @@ const ora = new Date();
                   placeholder="Es: Il paziente arriva sempre in ritardo alle sedute..." 
                   value={percheData.p_problema}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 />
               </div>
 
@@ -96,6 +106,7 @@ const ora = new Date();
                   placeholder="1. Perché?" 
                   value={percheData.p_1}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 />
                 <input 
                   type="text" 
@@ -104,6 +115,7 @@ const ora = new Date();
                   placeholder="2. Perché?" 
                   value={percheData.p_2}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 />
                 <input 
                   type="text" 
@@ -112,6 +124,7 @@ const ora = new Date();
                   placeholder="3. Perché?" 
                   value={percheData.p_3}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 />
                 <input 
                   type="text" 
@@ -120,6 +133,7 @@ const ora = new Date();
                   placeholder="4. Perché?" 
                   value={percheData.p_4}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 />
                 <input 
                   type="text" 
@@ -128,14 +142,18 @@ const ora = new Date();
                   placeholder="5. Perché? (Causa Radice)" 
                   value={percheData.p_5}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 />
               </div>
 
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
-                {/* Cambiato type="button" in type="submit" */}
+                
+
+                {location.pathname!=="/storico"?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#805ad5', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva Analisi
                 </button>
+                :""}
               </div>
             </form>
 

@@ -32,12 +32,12 @@ const Navigation = (props) => {
             }}
           >
             {/* Sezione Sinistra: Menu Hamburger */}
-            <div style={{ zIndex: 2 }}>
+            <div style={{ zIndex: 2,}}>
               <div 
                 className="menu-toggle" 
                 id="mobile-menu" 
                 onClick={toggleMenu} 
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: 'pointer', }}
               >
                 <span className="bar"></span>
                 <span className="bar"></span>
@@ -51,7 +51,7 @@ const Navigation = (props) => {
               left: '50%', 
               transform: 'translateX(-50%)', 
               margin: 0,
-              fontSize: '1.5rem',
+              fontSize: '2rem',
               whiteSpace: 'nowrap',
               zIndex: 1 
             }}>
@@ -63,14 +63,14 @@ const Navigation = (props) => {
               <Link 
                 to="/" 
                 className="btn btn-outline-primary btn-sm"
-                style={{ textDecoration: 'none' }}
+                style={{ backgroundColor: "transparent",color:"white",boxShadow:"none"}}
               >
                 Home
               </Link>
               <Link 
                 to="/dashboard" 
                 className="btn btn-outline-primary btn-sm"
-                style={{ textDecoration: 'none' }}
+                style={{  backgroundColor: "transparent",color:"white",boxShadow:"none" }}
               >
                 Dashboard
               </Link>

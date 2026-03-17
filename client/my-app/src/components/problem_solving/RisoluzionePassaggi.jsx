@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 
 const RisoluzionePassaggi = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+  const location=useLocation();
+ const toggleAccordion = (id) => {
+   setOpenAccordion(prev => ({
+     ...prev,
+     [id]: !prev[id]
+   }));
+ };
+  const [openAccordion, setOpenAccordion] = useState({
+      seiStep:  false
+    });
+
 
   // 1. Creiamo lo stato per memorizzare i dati dei 6 passaggi
-  const [stepData, setStepData] = useState({
+  const [stepData, setStepData] = useState(props.val==null?{
     step_1: '',
     step_2: '',
     step_3: '',
     step_4: '',
     step_5: '',
     step_6: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -59,7 +70,7 @@ const ora = new Date();
         <div className="accordion-header" onClick={() => toggleAccordion('seiStep')}>
           <div className="header-title">
             <span className="icon">🧩</span>
-            <h3>Risoluzione dei problemi in 6 passaggi</h3>
+            <h3>Risoluzione dei problemi in 6 passaggi {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.seiStep ? '−' : '+'}</span>
         </div>
@@ -90,6 +101,8 @@ const ora = new Date();
                         placeholder={placeholder} 
                         value={stepData[fieldName]}
                         onChange={handleInputChange}
+                        disabled={location.pathname==="/storico"?true:false}
+
                       />
                     </div>
                   );
@@ -97,10 +110,14 @@ const ora = new Date();
               </div>
 
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
-                {/* Cambiato type="button" in type="submit" */}
+                
+
+                  {location.pathname!=="/storico"?
+
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3182ce', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva Piano d'Azione
                 </button>
+                :""}
               </div>
             </form>
 

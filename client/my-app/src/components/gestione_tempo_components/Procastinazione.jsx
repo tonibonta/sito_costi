@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import API from '../API';
 
 const Procastinazione = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+ const toggleAccordion = (id) => {
+    setOpenAccordion(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+   const [openAccordion, setOpenAccordion] = useState({
+       procrastinazione:  false
+     });
 
   // 1. Creiamo lo stato per memorizzare i dati del form
-  const [procrastinazioneData, setProcrastinazioneData] = useState({
+  const [procrastinazioneData, setProcrastinazioneData] = useState(props.val==null?{
     proc_rana: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -45,7 +53,7 @@ const Procastinazione = (props) => {
         <div className="accordion-header" onClick={() => toggleAccordion('procrastinazione')}>
           <div className="header-title">
             <span className="icon">🐸</span>
-            <h3>La Procrastinazione</h3>
+            <h3>La Procrastinazione  {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.procrastinazione ? '−' : '+'}</span>
         </div>
@@ -79,14 +87,18 @@ const Procastinazione = (props) => {
                   placeholder="Es: Devo iniziare a scrivere il primo paragrafo..."
                   value={procrastinazioneData.proc_rana}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
                 ></textarea>
               </div>
 
+
+              {location.pathname!=="/storico"?
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#38b2ac', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva la tua Rana
                 </button>
               </div>
+              :""}
             </form>
           </div>
         </div>

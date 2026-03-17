@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import API from '../API';
+import { useLocation } from 'react-router';
 
 const MatriceEisenhower = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+  const location=useLocation()
+ const [openAccordion, setOpenAccordion] = useState({
+       eisenhower:  false
+     });
+ const toggleAccordion = (id) => {
+     setOpenAccordion(prev => ({
+       ...prev,
+       [id]: !prev[id]
+     }));
+   };
 
   // 1. Creiamo lo stato per memorizzare i dati dei 4 quadranti
-  const [eisenhowerData, setEisenhowerData] = useState({
+  const [eisenhowerData, setEisenhowerData] = useState(props.val==null?{
     eis_fai: '',
     eis_pianifica: '',
     eis_delega: '',
     eis_elimina: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -49,7 +59,7 @@ const MatriceEisenhower = (props) => {
         <div className="accordion-header" onClick={() => toggleAccordion('eisenhower')}>
           <div className="header-title">
             <span className="icon">📊</span>
-            <h3>Matrice di Eisenhower</h3>
+            <h3>Matrice di Eisenhower  {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.eisenhower ? '−' : '+'}</span>
         </div>
@@ -75,6 +85,8 @@ const MatriceEisenhower = (props) => {
                     placeholder="Es: Consegnare la tesi entro domani..."
                     value={eisenhowerData.eis_fai}
                     onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                   ></textarea>
                 </div>
 
@@ -88,6 +100,8 @@ const MatriceEisenhower = (props) => {
                     placeholder="Es: Studiare 2 ore al giorno per l'esame del mese prossimo..."
                     value={eisenhowerData.eis_pianifica}
                     onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                   ></textarea>
                 </div>
 
@@ -101,6 +115,8 @@ const MatriceEisenhower = (props) => {
                     placeholder="Es: Rispondere a email di poco conto..."
                     value={eisenhowerData.eis_delega}
                     onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                   ></textarea>
                 </div>
 
@@ -114,13 +130,16 @@ const MatriceEisenhower = (props) => {
                     placeholder="Es: Scrollare i social per 3 ore..."
                     value={eisenhowerData.eis_elimina}
                     onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                   ></textarea>
                 </div>
               </div>
-
+              {location.pathname!=="/storico"?
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3182ce', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Salva Matrice</button>
               </div>
+                :""}
             </form>
           </div>
         </div>
