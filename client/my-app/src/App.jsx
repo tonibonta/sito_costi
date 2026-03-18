@@ -59,7 +59,7 @@ const handleLogin = async (credentials) => {
  * This function handles the logout process.
  */ 
 const handleLogout = async () => {
-  console.log("h")
+
   await API.logOut();
   setLoggedIn(false);
   // clean up everything

@@ -42,7 +42,7 @@ const Storico = (props) => {
     document.title = "Storico - Soft Skills Rehab UniTo";
     API.getAll(props.user.id).then((data)=>{
         setCategoria(data);
-        console.log(data[4].tipo);
+      
     });
 
       
