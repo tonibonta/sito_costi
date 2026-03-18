@@ -11,7 +11,7 @@ const morgan = require("morgan");
 app.use(express.json()); // <- obbligatorio per leggere il body JSON
 app.use(morgan('dev'));
 const corsOptions = {
-  origin: ['http://localhost:5173','http://localhost:5174'],
+  origin: ['http://localhost:5173','http://localhost:5174','https://soft-skills-app.vercel.app'],
   credentials: true,
 };
 app.use(cors(corsOptions));
