@@ -7,7 +7,7 @@ import { Procastinazione } from './gestione_tempo_components/Procastinazione';
 import { Consigli } from './gestione_tempo_components/Consigli';
 
 
-const GestioneTempo = () => {
+const GestioneTempo = (props) => {
 
 
   // Stato per gestire l'apertura degli accordion indipendentemente
@@ -46,12 +46,12 @@ const GestioneTempo = () => {
           <p style={{ color: '#718096', fontSize: '1.1rem' }}>Valuta le tue competenze e scopri il tuo livello.</p>
         </div>
         <AutovalutazioneGestioneTempo  />
-        <ModelloSmart openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
+        <ModelloSmart openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} />
 
-        <MatriceEisenhower openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
-        <TecnicaPomodoro openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
-        <Procastinazione openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
-        <Consigli openAccordion={openAccordion} toggleAccordion={toggleAccordion} />
+        <MatriceEisenhower openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} />
+        <TecnicaPomodoro openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} />
+        <Procastinazione openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+        <Consigli openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
 
         
       </div>

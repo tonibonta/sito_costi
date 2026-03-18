@@ -3,7 +3,7 @@ import { ScelteBivio } from './intraprendenza/ScelteBivio';
 import { GeneratoreOpportunita } from './intraprendenza/GeneratoreOpportunita';
 
 
-export const Intraprendenza = () => {
+export const Intraprendenza = (props) => {
   const[openAccordion, setOpenAccordion] = useState({
     sceltebivio: false,
     generatoreopportunita: false
@@ -23,8 +23,8 @@ export const Intraprendenza = () => {
         <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Intraprendenza</h2>
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Prendi l'iniziativa e crea il tuo percorso.</p>
       </div>
-      <ScelteBivio openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-      <GeneratoreOpportunita openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <ScelteBivio user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <GeneratoreOpportunita user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
     </div>
   );
 };

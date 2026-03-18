@@ -8,9 +8,10 @@ const { ResultWithContextImpl } = require("express-validator/lib/chain/context-r
 const db=require("./db.js");
 
 
-exports.getAll=()=>{
+exports.getAll=(id)=>{
+    
 return new Promise((resolve,reject)=>{
-    db.all('select * from attivita',[],(err,rows)=>{
+    db.all('select * from attivita where id_user=?',[id],(err,rows)=>{
         if(err){
             reject(err);
         }else if(rows.length===0){

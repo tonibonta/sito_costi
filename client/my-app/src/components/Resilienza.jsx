@@ -7,7 +7,7 @@ import { SfideGiornaliere } from './resilienza/SfideGiornaliere';
 import { TermometroStress } from './resilienza/TermometroStress';
 
 
-const Resilienza=()=> {
+const Resilienza=(props)=> {
   // Gestione stato degli accordion
   const [openAccordion, setOpenAccordion] = useState({
     termometro: false,
@@ -37,8 +37,8 @@ const Resilienza=()=> {
           <p style={{ color: '#718096', fontSize: '1.1rem' }}>Valuta le tue competenze e scopri il tuo livello.</p>
         </div>
 
-       <TermometroStress openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <SfideGiornaliere openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <TermometroStress user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <SfideGiornaliere user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
 
 
 

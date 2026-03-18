@@ -7,7 +7,7 @@ import { Biofeedback } from './autoregolazione_emotiva/Biofeedback';
 
 
 
-const AutoregolazioneEmotiva=()=> {
+const AutoregolazioneEmotiva=(props)=> {
   // Gestione stato degli accordion
   const [openAccordion, setOpenAccordion] = useState({
     biofeedback: false,
@@ -40,11 +40,11 @@ const AutoregolazioneEmotiva=()=> {
           <p style={{ color: '#718096', fontSize: '1.1rem' }}>Valuta le tue competenze e scopri il tuo livello.</p>
         </div>
 
-       <DiarioEmotivo openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <Biofeedback openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <Mindfulness openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <Coping openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <CopingStrategie openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <DiarioEmotivo user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <Biofeedback user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <Mindfulness user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <Coping user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <CopingStrategie user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
 
        
 

@@ -3,9 +3,10 @@ import API from '../API';
 import { useLocation } from 'react-router-dom';
 
 // ATTIVITÀ 1: Goal Setter (Metodo SMART)
-const GoalSetter = () => {
+const GoalSetter = (props) => {
   // 1. Stato per memorizzare i dati dell'obiettivo
-  const [goal, setGoal] = useState({ vago: '', S: '', M: '', A: '', R: '', T: '' });
+  const location=useLocation();
+  const [goal, setGoal] = useState(props.val==null?{ vago: '', S: '', M: '', A: '', R: '', T: '' }:JSON.parse(props.val.valore));
   const [showCard, setShowCard] = useState(false);
    const [openAccordion, setOpenAccordion] = useState({
           goalsetter:  false
@@ -68,6 +69,8 @@ const GoalSetter = () => {
                 name="vago"
                 value={goal.vago}
                 onChange={handleInputChange}
+                disabled={location.pathname==="/storico"?true:false}
+
                 placeholder="Scrivi il tuo obiettivo vago (es. Voglio studiare di più)" 
                 style={{ padding: '10px', width: '100%', border: '1px solid #cbd5e0', borderRadius: '5px' }} 
               />
@@ -76,16 +79,18 @@ const GoalSetter = () => {
                 <div style={{ padding: '15px', backgroundColor: '#f0fff4', borderRadius: '8px', marginTop: '10px' }}>
                   <h4 style={{ color: '#2f855a' }}>Ora rendiamolo SMART:</h4>
                   
-                  <input type="text" name="S" value={goal.S} onChange={handleInputChange} placeholder="Specifico (S) - Cosa vuoi esattamente?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
-                  <input type="text" name="M" value={goal.M} onChange={handleInputChange} placeholder="Misurabile (M) - Come misurerai il successo?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
-                  <input type="text" name="A" value={goal.A} onChange={handleInputChange} placeholder="Raggiungibile (A) - È realistico?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
-                  <input type="text" name="R" value={goal.R} onChange={handleInputChange} placeholder="Rilevante (R) - Perché è importante per te?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
-                  <input type="text" name="T" value={goal.T} onChange={handleInputChange} placeholder="Temporizzato (T) - Entro quando lo farai?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
+                  <input type="text" name="S" value={goal.S} onChange={handleInputChange} disabled={location.pathname==="/storico"?true:false} placeholder="Specifico (S) - Cosa vuoi esattamente?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
+                  <input type="text" name="M" value={goal.M} onChange={handleInputChange} disabled={location.pathname==="/storico"?true:false}placeholder="Misurabile (M) - Come misurerai il successo?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
+                  <input type="text" name="A" value={goal.A} onChange={handleInputChange} disabled={location.pathname==="/storico"?true:false}placeholder="Raggiungibile (A) - È realistico?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
+                  <input type="text" name="R" value={goal.R} onChange={handleInputChange} disabled={location.pathname==="/storico"?true:false}placeholder="Rilevante (R) - Perché è importante per te?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
+                  <input type="text" name="T" value={goal.T} onChange={handleInputChange} disabled={location.pathname==="/storico"?true:false}placeholder="Temporizzato (T) - Entro quando lo farai?" style={{ width: '100%', margin: '5px 0', padding: '8px', border: '1px solid #cbd5e0', borderRadius: '5px' }} required />
                   
                   {/* Cambiato in type="submit" */}
+                  {location.pathname!=="/storico"?
                   <button type="submit" className="btn" style={{ marginTop: '15px', backgroundColor: '#38b2ac', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
                     Genera Scheda e Salva
                   </button>
+                  :""}
                 </div>
               )}
             </form>

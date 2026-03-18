@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
- const Comunicazione = () => {
+ const Comunicazione = (props) => {
   const[openAccordion, setOpenAccordion] = useState({
     assiomi: false,
    
@@ -20,7 +20,7 @@ import React, { useState, useEffect } from 'react';
         <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Comunicazione</h2>
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Prendi l'iniziativa e crea il tuo percorso.</p>
       </div>
-      <AssiomiComunicazione openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <AssiomiComunicazione user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
      
     </div>
   );

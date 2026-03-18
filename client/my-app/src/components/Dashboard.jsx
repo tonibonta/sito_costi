@@ -2,7 +2,7 @@ import React, { useEffect,useState} from 'react';
 
 
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
   const [selezione,setSelezione]=useState('dati_personali');
   // Imposta il titolo della scheda del browser
@@ -28,31 +28,17 @@ const Dashboard = () => {
               <div className="avatar-container">
                 {/* Immagine con tag di chiusura */}
                 <img 
-                  src="https://ui-avatars.com/api/?name=Mario+Rossi&background=2b6cb0&color=fff&size=120" 
+                  src={"https://ui-avatars.com/api/?name="+props.user.name+"+"+props.user.surname+"+&background=2b6cb0&color=fff&size=120"} 
                   alt="Avatar Utente" 
                   className="avatar" 
                 />
               </div>
-              <h3>Mario Rossi</h3>
-              <p className="user-role">Studente - Fisioterapia</p>
-              <p className="user-id">Matricola: <strong>876543</strong></p>
+              <h3>{props.user.name} {props.user.surname}</h3>
+              <p className="user-role">Studente - {props.user.course}</p>
+              <p className="user-id">Email: <strong>{props.user.email}</strong></p>
               <button className="badge">Dati personali</button>
        
-              <hr className="divider" />
-
-              <div className="badges-section">
-                <h4>Attività</h4>
-                <div className="badges-container">
-                  <button className="badge">Gestione tempo</button>
-                  <button className="badge">Problem Solving</button>
-                  <button className="badge">Autoregolazione emotiva</button>
-                  <button className="badge">Valorizzazione di sè</button>
-                  <button className="badge">Orientamento all'obiettivo</button>
-         
-
-
-                </div>
-              </div>
+              
             </div>
           </div>
           
@@ -68,45 +54,30 @@ const Dashboard = () => {
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" defaultValue="Mario" required />
+                    <input type="text" id="nome" name="nome" defaultValue={props.user.name} disabled={true} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="cognome">Cognome</label>
-                    <input type="text" id="cognome" name="cognome" defaultValue="Rossi" required />
+                    <input type="text" id="cognome" name="cognome" defaultValue={props.user.surname} disabled={true} />
                   </div>
                 </div>
 
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="email">Email Istituzionale</label>
-                    <input type="email" id="email" name="email" defaultValue="mario.rossi@edu.unito.it" required />
+                    <input type="email" id="email" name="email" defaultValue={props.user.email} disabled={true} />
                   </div>
+                    <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="corso">Corso di Laurea</label>
-                    {/* Il defaultValue in React va sul tag select, non sulle singole option */}
-                    <select id="corso" name="corso" defaultValue="fisioterapia">
-                      <option value="fisioterapia">Fisioterapia</option>
-                      <option value="logopedia">Logopedia</option>
-                      <option value="infermieristica">Infermieristica</option>
-                      <option value="tecniche_riabilitazione">Tecniche della Riabilitazione Psichiatrica</option>
-                    </select>
+                    <label htmlFor="email">Corso</label>
+                    <input type="corso" id="corso" name="corso" defaultValue={props.user.course} disabled={true} />
+                  </div>
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="bio">Breve Presentazione (Bio)</label>
-                  <textarea 
-                    id="bio" 
-                    name="bio" 
-                    rows="4" 
-                    placeholder="Scrivi qualcosa su di te e sui tuoi obiettivi professionali..."
-                  ></textarea>
-                </div>
+                
 
-                <div className="form-actions">
-                  <button type="submit" className="btn btn-primary">Salva Modifiche</button>
-                  <button type="button" className="btn btn-secondary">Cambia Password</button>
-                </div>
+              
               </form>
             </div>
           </div>

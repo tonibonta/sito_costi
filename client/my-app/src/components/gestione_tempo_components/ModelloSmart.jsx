@@ -33,6 +33,7 @@ const ModelloSmart = (props) => {
   // 3. Funzione che intercetta il salvataggio (qui farai la chiamata al server)
   const handleSubmit = (e) => {
     e.preventDefault(); 
+    console.log(props.user)
     
     // Qui hai la tua variabile pronta con tutte le risposte!
     console.log("Dati pronti per essere inviati al server:", smartData);
@@ -42,7 +43,7 @@ const ModelloSmart = (props) => {
       classe:"gestione_tempo",
       tipo:"modello_smart",
       valore:JSON.stringify(smartData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

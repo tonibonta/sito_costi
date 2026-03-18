@@ -5,7 +5,7 @@ import { RisoluzionePassaggi } from './problem_solving/RisoluzionePassaggi';
 import { ActionLearning } from './problem_solving/ActionLearning';
 
 
-const ProblemSolving=()=> {
+const ProblemSolving=(props)=> {
   // Gestione stato degli accordion
   const [openAccordion, setOpenAccordion] = useState({
     cinquePerche: false,
@@ -37,10 +37,10 @@ const ProblemSolving=()=> {
           <p style={{ color: '#718096', fontSize: '1.1rem' }}>Valuta le tue competenze e scopri il tuo livello.</p>
         </div>
 
-       <CinquePerche openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <AlberoProblemi openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <RisoluzionePassaggi openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-       <ActionLearning openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <CinquePerche user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <AlberoProblemi  user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <RisoluzionePassaggi  user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+       <ActionLearning user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
 
 
       </div>

@@ -95,7 +95,7 @@ const toggleAccordion = (id) => {
       classe:"gestione_tempo",
       tipo:"questionario_autovalutativo",
       valore:categoriaFinale,
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

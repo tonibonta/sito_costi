@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css'; // Assicurati di importare il tuo CSS qui
 import { Container } from 'react-bootstrap';
+import { LoginButton,LogoutButton } from './Loginform';
 
 const Navigation = (props) => {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -42,7 +43,9 @@ const Navigation = (props) => {
                 <span className="bar"></span>
                 <span className="bar"></span>
                 <span className="bar"></span>
+                
               </div>
+              
             </div>
 
             {/* Sezione Centrale: Titolo */}
@@ -63,17 +66,19 @@ const Navigation = (props) => {
               <Link 
                 to="/" 
                 className="btn btn-outline-primary btn-sm"
-                style={{ backgroundColor: "transparent",color:"white",boxShadow:"none"}}
+                style={{ backgroundColor: "transparent",color:"white",boxShadow:"none",marginLeft:"10%"}}
               >
                 Home
               </Link>
               <Link 
                 to="/dashboard" 
                 className="btn btn-outline-primary btn-sm"
-                style={{  backgroundColor: "transparent",color:"white",boxShadow:"none" }}
+                style={{  backgroundColor: "transparent",color:"white",boxShadow:"none"}}
               >
                 Dashboard
               </Link>
+              
+               {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}
             </div>
 
           </div>

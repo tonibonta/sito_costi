@@ -30,7 +30,7 @@ const Consigli = (props) => {
       classe:"gestione_tempo",
       tipo:"consigli",
       valore:JSON.stringify(consigliData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

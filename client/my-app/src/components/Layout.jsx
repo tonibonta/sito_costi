@@ -13,6 +13,7 @@ import { LavoriInGruppo } from './LavoriInGruppo';
 import { Comunicazione } from './Comunicazione';
 import { GestioneConflitto } from './GestioneConflitto';
 import { Storico } from './Storico';
+import { Loginform } from './Loginform';
 
 
 
@@ -20,9 +21,9 @@ function Home_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
-    <Home/>
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
+    <Home user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -36,9 +37,9 @@ function Dashboard_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
-    <Dashboard/>
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
+    <Dashboard user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -53,10 +54,10 @@ function GestioneTempo_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <GestioneTempo/>
+    <GestioneTempo user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -69,10 +70,10 @@ function ProblemSolving_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <ProblemSolving/>
+    <ProblemSolving user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -86,10 +87,10 @@ function AutoregolazioneEmotiva_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <AutoregolazioneEmotiva/>
+    <AutoregolazioneEmotiva user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -102,10 +103,10 @@ function ValorizzazioneDiSe_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <ValorizzazioneDiSe/>
+    <ValorizzazioneDiSe user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -118,10 +119,10 @@ function OrientamentoObiettivo_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <OrientamentoObiettivo/>
+    <OrientamentoObiettivo user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -134,10 +135,10 @@ function Intraprendenza_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <Intraprendenza/>
+    <Intraprendenza user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -150,10 +151,10 @@ function AttribuzioneCausale_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <AttribuzioneCausale/>
+    <AttribuzioneCausale user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -166,10 +167,10 @@ function Resilienza_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <Resilienza/>
+    <Resilienza user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -182,10 +183,10 @@ function LavoriInGruppo_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <LavoriInGruppo/>
+    <LavoriInGruppo user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -199,10 +200,10 @@ function Comunicazione_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <Comunicazione/>
+    <Comunicazione user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -216,10 +217,10 @@ function GestioneConflitti_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn} logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <GestioneConflitto/>
+    <GestioneConflitto user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -235,10 +236,10 @@ function Storico_layout(props){
 return(
     <>
  
-    <Navigation/>
-    <main class="fade-in">
+    <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
    
-    <Storico/>
+    <Storico user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
@@ -248,11 +249,36 @@ return(
 
 }
 
+function PageNotFound(){
+  return(
+    <h1>PAGE NOT FOUND</h1>
+  );
+}
+
+
+function LoginLayout(props){
+  return(
+    <>
+     <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
+   
+        <Loginform login={props.login} logout={props.logout}/>
+
+    </main>
+       <footer>
+        <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+      </footer>
+    
+    </>
+  );
+
+}
+
 
 
 export {Home_layout,Dashboard_layout,GestioneTempo_layout,
         ProblemSolving_layout,AutoregolazioneEmotiva_layout,ValorizzazioneDiSe_layout,OrientamentoObiettivo_layout,
         Intraprendenza_layout,AttribuzioneCausale_layout,Resilienza_layout,
-        LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout
+        LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout,LoginLayout,PageNotFound
 
 }

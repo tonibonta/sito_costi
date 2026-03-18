@@ -3,7 +3,7 @@ import { GoalSetter } from './orientamentoobiettivo/GoalSetter';
 import { MonitoraggioObiettivi } from './orientamentoobiettivo/MonitoraggioObiettivi';
 
 
-export const OrientamentoObiettivo = () => {
+export const OrientamentoObiettivo = (props) => {
   const [openAccordion, setOpenAccordion] = useState({
     goalsetter: false,
     monitoraggio: false
@@ -23,8 +23,8 @@ export const OrientamentoObiettivo = () => {
         <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Orientamento all'Obiettivo</h2>
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Impara a definire e raggiungere i tuoi traguardi.</p>
       </div>
-      <GoalSetter openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
-      <MonitoraggioObiettivi openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <GoalSetter user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <MonitoraggioObiettivi user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
     </div>
   );
 };

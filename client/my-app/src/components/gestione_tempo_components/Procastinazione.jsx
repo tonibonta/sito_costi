@@ -38,7 +38,7 @@ const Procastinazione = (props) => {
       classe:"gestione_tempo",
       tipo:"procastinazione",
       valore:JSON.stringify(procrastinazioneData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

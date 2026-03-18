@@ -19,7 +19,7 @@ import { GoalSetter } from './orientamentoobiettivo/GoalSetter';
 import { GestioneConflitto } from './GestioneConflitto';
 import { SfideGiornaliere } from './resilienza/SfideGiornaliere';
 
-const Storico = () => {
+const Storico = (props) => {
   // Stato per gestire l'apertura delle MACRO-CATEGORIE (Livello 1)
   const [categoria,setCategoria]=useState([]);
   const [openCategory, setOpenCategory] = useState({
@@ -40,12 +40,9 @@ const Storico = () => {
 
   useEffect(() => {
     document.title = "Storico - Soft Skills Rehab UniTo";
-    API.getAll().then((data)=>{
-        
+    API.getAll(props.user.id).then((data)=>{
         setCategoria(data);
-    
         console.log(data[4].tipo);
-
     });
 
       
@@ -117,24 +114,24 @@ const Storico = () => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
                 {categoria.filter(val=>val.tipo==="questionario_autovalutativo").map(val=>{
-                    return  <AutovalutazioneGestioneTempo val={val}/>
+                    return  <AutovalutazioneGestioneTempo key={val.id} val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="modello_smart").map(val=>{
-                    return  <ModelloSmart val={val}/>
+                    return  <ModelloSmart key={val.id} val={val}/>
                 })}
                 
                 {categoria.filter(val=>val.tipo==="matrice_eisenhower").map(val=>{
-                    return  <MatriceEisenhower val={val}/>
+                    return  <MatriceEisenhower key={val.id} val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="tecnica_pomodoro").map(val=>{
-                    return  <TecnicaPomodoro val={val}/>
+                    return  <TecnicaPomodoro key={val.id}val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="procastinazione").map(val=>{
-                    return  <Procastinazione val={val}/>
+                    return  <Procastinazione key={val.id}val={val}/>
                 })}
                 
                 {categoria.filter(val=>val.tipo==="consigli").map(val=>{
-                    return  <Consigli val={val}/>
+                    return  <Consigli key={val.id} val={val}/>
                 })}
               
 
@@ -194,17 +191,17 @@ const Storico = () => {
               <div style={{ padding: '2rem' }}>
    
                   {categoria.filter(val=>val.tipo==="cinque_perche").map(val=>{
-                    return  <CinquePerche val={val}/>
+                    return  <CinquePerche key={val.id}val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="albero_problemi").map(val=>{
-                    return  <AlberoProblemi val={val}/>
+                    return  <AlberoProblemi key={val.id}val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="risoluzione_passaggi").map(val=>{
-                    return  <RisoluzionePassaggi val={val}/>
+                    return  <RisoluzionePassaggi key={val.id}val={val}/>
                 })}
                 
                 {categoria.filter(val=>val.tipo==="action_learning").map(val=>{
-                    return  <ActionLearning val={val}/>
+                    return  <ActionLearning key={val.id}val={val}/>
                 })}
               </div>
 
@@ -261,13 +258,13 @@ const Storico = () => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
        {categoria.filter(val=>val.tipo==="diario_emotivo").map(val=>{
-                    return  <DiarioEmotivo val={val}/>
+                    return  <DiarioEmotivo key={val.id}val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="coping_questionario").map(val=>{
-                    return  <Coping val={val}/>
+                    return  <Coping key={val.id}val={val}/>
                 })}
                 {categoria.filter(val=>val.tipo==="coping_sfide").map(val=>{
-                    return  <CopingStrategie val={val}/>
+                    return  <CopingStrategie key={val.id}val={val}/>
                 })}
         
               </div>
@@ -325,7 +322,7 @@ const Storico = () => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
        {categoria.filter(val=>val.tipo==="digital_journaling").map(val=>{
-                    return  <DigitalJournaling val={val}/>
+                    return  <DigitalJournaling key={val.id}val={val}/>
                 })}
   
               </div>
@@ -384,7 +381,7 @@ const Storico = () => {
               <div style={{ padding: '2rem' }}>
    
                    {categoria.filter(val=>val.tipo==="goal_setter").map(val=>{
-                    return  <GoalSetter val={val}/>
+                    return  <GoalSetter key={val.id}val={val}/>
                 })}
    
               </div>

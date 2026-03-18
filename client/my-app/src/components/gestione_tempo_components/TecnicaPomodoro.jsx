@@ -41,7 +41,7 @@ const toggleAccordion = (id) => {
       classe:"gestione_tempo",
       tipo:"tecnica_pomodoro",
       valore:JSON.stringify(pomodoroData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

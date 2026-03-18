@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 
 
-export const LavoriInGruppo = () => {
+export const LavoriInGruppo = (props) => {
   const[openAccordion, setOpenAccordion] = useState({
     tuckman: false,
    
@@ -22,7 +22,7 @@ export const LavoriInGruppo = () => {
         <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Lavoro in gruppo</h2>
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Prendi l'iniziativa e crea il tuo percorso.</p>
       </div>
-      <ModelloTuckman openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <ModelloTuckman  user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
      
     </div>
   );
