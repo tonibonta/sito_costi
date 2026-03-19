@@ -37,7 +37,7 @@ const SfideGiornaliere = (props) => {
       classe:"resilienza",
       tipo:"sfide_giornaliere",
       valore:JSON.stringify({"sfidaAttuale":sfidaAttuale}),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

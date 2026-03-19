@@ -110,7 +110,7 @@ const toggleAccordion = (id) => {
         "profilo":profilo,
         "descrizione":descrizione
       }),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

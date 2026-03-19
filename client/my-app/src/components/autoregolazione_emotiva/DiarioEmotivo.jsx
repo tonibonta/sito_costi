@@ -47,7 +47,7 @@ const ora = new Date();
       classe:"autoregolazione_emotiva",
       tipo:"diario_emotivo",
       valore:JSON.stringify(diarioData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

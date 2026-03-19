@@ -41,7 +41,7 @@ const GoalSetter = (props) => {
       classe:"orientamento_obiettivo",
       tipo:"goal_setter",
       valore:JSON.stringify(goal),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

@@ -42,7 +42,7 @@ const ora = new Date();
       classe:"valorizzazione_di_se",
       tipo:"digital_journaling",
       valore:JSON.stringify(entries),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);
