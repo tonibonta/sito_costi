@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 
 const AutovalutazioneGestioneTempo = (props) => {
+  const [msg,setMsg]=useState(null);
   const location=useLocation();
   const [risultato, setRisultato] = useState(props.val!=null?props.val.valore:null); 
   const [risposte, setRisposte] = useState({});
@@ -98,7 +99,9 @@ const toggleAccordion = (id) => {
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+      setMsg("Completato!");
+      setTimeout(()=>{setMsg(null)},4000)
+
     });
 
   };
@@ -203,13 +206,19 @@ const toggleAccordion = (id) => {
                   </label>
                 </div>
               </div>
-              {location.pathname!=="/storico"?
+             
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+              {location.pathname!=="/storico"?
+              msg==null?
                 <button type="submit" className="btn btn-primary">
                   {risultato ? 'Ricalcola Risultato' : 'Calcola il mio Risultato'}
                 </button>
+                : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                  {msg}
+                </button>
+                   :""}
               </div>
-                :""}
+             
             </form>
    
           </div>

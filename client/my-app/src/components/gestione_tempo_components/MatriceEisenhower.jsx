@@ -3,6 +3,7 @@ import API from '../API';
 import { useLocation } from 'react-router';
 
 const MatriceEisenhower = (props) => {
+  const [msg,setMsg]=useState(null);
   const location=useLocation()
  const [openAccordion, setOpenAccordion] = useState({
        eisenhower:  false
@@ -47,7 +48,8 @@ const MatriceEisenhower = (props) => {
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+      setMsg("Completato!");
+      setTimeout(()=>{setMsg(null);},4000);
     })
 
   };
@@ -135,11 +137,18 @@ const MatriceEisenhower = (props) => {
                   ></textarea>
                 </div>
               </div>
-              {location.pathname!=="/storico"?
+              
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+               {location.pathname!=="/storico"?
+               msg==null?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3182ce', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Salva Matrice</button>
-              </div>
+              : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                  {msg}
+                </button>
                 :""}
+              
+              </div>
+              
             </form>
           </div>
         </div>

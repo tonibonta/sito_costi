@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import API from '../API';
 import { useLocation } from 'react-router';
 const ModelloSmart = (props) => {
+  
   const toggleAccordion = (id) => {
     setOpenAccordion(prev => ({
       ...prev,

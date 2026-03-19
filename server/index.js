@@ -140,7 +140,7 @@ app.get('/api/attivita/tipo/:tipo',isLoggedIn,(req,res)=>{
 app.post('/api/attivita/',isLoggedIn,(req,res)=>{
     const attivita=req.body;
     attivitadao.storeAttivita(attivita).then((result)=>{
-        console.log(result);
+        res.send({"risultato":result});
     })
 })
 const PORT = process.env.PORT || 3001;
