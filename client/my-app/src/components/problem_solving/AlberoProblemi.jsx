@@ -41,7 +41,7 @@ const ora = new Date();
       classe:"problem_solving",
       tipo:"albero_problemi",
       valore:JSON.stringify(alberoData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

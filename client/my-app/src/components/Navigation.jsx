@@ -71,7 +71,7 @@ const Navigation = (props) => {
                 Home
               </Link>
               <Link 
-                to="/dashboard" 
+                to="/storico" 
                 className="btn btn-outline-primary btn-sm"
                 style={{  backgroundColor: "transparent",color:"white",boxShadow:"none"}}
               >
@@ -93,7 +93,7 @@ const Navigation = (props) => {
             </button>
           </div>
           <ul>
-            <li><Link to="/storico">Storico</Link></li>
+  
             <li><Link to="/gestione-tempo">Gestione del Tempo</Link></li>
             <li><Link to="/problem-solving">Problem Solving</Link></li>
             <li><Link to="/autoregolazione-emotiva">Autoregolazione emotiva</Link></li>

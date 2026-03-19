@@ -6,7 +6,8 @@ import { Home_layout,Dashboard_layout, GestioneTempo_layout,
     LavoriInGruppo_layout, 
     Comunicazione_layout,
     GestioneConflitti_layout,
-    Storico_layout,LoginLayout,PageNotFound} from './components/Layout'
+    Storico_layout,LoginLayout,PageNotFound,
+    BibliografiaLayout} from './components/Layout'
 
 import {Routes ,Route,useLocation ,useNavigate,Navigate } from 'react-router'
 import './App.css'
@@ -19,6 +20,8 @@ function App() {
   const navigate=useNavigate();
  const location=useLocation();
  useEffect(()=> {
+
+
   const checkAuth = async() => {
     try {
       // here you have the user info, if already logged in
@@ -74,6 +77,10 @@ const handleLogout = async () => {
     <Routes>
       <Route path='/' element={loggedIn?
         <Home_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
+                                        user={user}/>
+      }></Route>
+       <Route path='/bibliografia' element={loggedIn?
+        <BibliografiaLayout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
       

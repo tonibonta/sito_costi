@@ -18,10 +18,10 @@
 * {
     scroll-behavior: smooth; /* Rende lo scroll fluido */
     scroll-padding-top: 90px; /* Evita che il menu fisso copra il titolo quando si clicca il bottone */
-    
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+   
      
 }
 
@@ -31,12 +31,15 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
-    height:100%
+    height:100%;
+    overflow-anchor: none;
 }
 
 /* Animazione di caricamento pagina */
 .fade-in {
+    
     animation: fadeIn 0.8s ease-in-out;
+     
 }
 
 @keyframes fadeIn {

@@ -14,6 +14,9 @@ import { Comunicazione } from './Comunicazione';
 import { GestioneConflitto } from './GestioneConflitto';
 import { Storico } from './Storico';
 import { Loginform } from './Loginform';
+import { Link, useLocation } from 'react-router';
+import { useEffect } from 'react';
+import { Bibliografia } from './Bibliografia';
 
 
 
@@ -27,6 +30,9 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
+       
+
       </footer>
 
     </>);
@@ -43,6 +49,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -61,6 +68,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -77,6 +85,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -94,6 +103,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -110,6 +120,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -126,6 +137,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -142,6 +154,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -158,6 +171,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -174,6 +188,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -189,7 +204,7 @@ return(
     <LavoriInGruppo user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
-        <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+        <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>  <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -207,6 +222,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -224,6 +240,7 @@ return(
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -233,16 +250,23 @@ return(
 
 
 function Storico_layout(props){
+  const location=useLocation()
+useEffect(() => {
+  window.scrollTo(-50, 0);
+}, [location.pathname]);
+
 return(
     <>
  
     <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     <main className="fade-in">
-   
+      
+   <Dashboard user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     <Storico user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
 
     </>);
@@ -267,6 +291,7 @@ function LoginLayout(props){
     </main>
        <footer>
         <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
       </footer>
     
     </>
@@ -274,11 +299,28 @@ function LoginLayout(props){
 
 }
 
+function BibliografiaLayout(props){
+  return(
+    <>
+     <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
+   
+        <Bibliografia user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
 
+    </main>
+       <footer>
+        <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+        <Link to="/bibliografia">bibliografia</Link>
+      </footer>
+    
+    </>
+  );
+
+}
 
 export {Home_layout,Dashboard_layout,GestioneTempo_layout,
         ProblemSolving_layout,AutoregolazioneEmotiva_layout,ValorizzazioneDiSe_layout,OrientamentoObiettivo_layout,
         Intraprendenza_layout,AttribuzioneCausale_layout,Resilienza_layout,
-        LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout,LoginLayout,PageNotFound
+        LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout,LoginLayout,PageNotFound,BibliografiaLayout
 
 }

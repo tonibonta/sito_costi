@@ -47,7 +47,7 @@ const ora = new Date();
       classe:"problem_solving",
       tipo:"risoluzione_passaggi",
       valore:JSON.stringify(stepData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

@@ -43,7 +43,7 @@ const ora = new Date();
       classe:"problem_solving",
       tipo:"cinque_perche",
       valore:JSON.stringify(percheData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);

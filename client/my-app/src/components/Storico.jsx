@@ -42,8 +42,13 @@ const Storico = (props) => {
     document.title = "Storico - Soft Skills Rehab UniTo";
     API.getAll(props.user.id).then((data)=>{
         setCategoria(data);
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 0);
       
     });
+    
+   
 
       
   },[]); 
@@ -61,7 +66,7 @@ const Storico = (props) => {
       <div className="fade-in" style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 0' }}>
         
         <div className="page-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Storico Questionari</h2>
+          <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Storico Attività</h2>
          
         </div>
         <div style={{

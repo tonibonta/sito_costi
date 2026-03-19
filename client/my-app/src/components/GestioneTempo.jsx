@@ -45,7 +45,7 @@ const GestioneTempo = (props) => {
           <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Gestione del Tempo</h2>
           <p style={{ color: '#718096', fontSize: '1.1rem' }}>Valuta le tue competenze e scopri il tuo livello.</p>
         </div>
-        <AutovalutazioneGestioneTempo  />
+        <AutovalutazioneGestioneTempo  openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} />
         <ModelloSmart openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} />
 
         <MatriceEisenhower openAccordion={openAccordion} toggleAccordion={toggleAccordion} user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout} />

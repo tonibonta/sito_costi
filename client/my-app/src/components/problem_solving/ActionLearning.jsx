@@ -44,7 +44,7 @@ const ora = new Date();
       classe:"problem_solving",
       tipo:"action_learning",
       valore:JSON.stringify(actionData),
-      id_user:1
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
       console.log(data);
