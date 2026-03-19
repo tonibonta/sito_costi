@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import API from '../API';
 
 const Consigli = (props) => {
-  const { toggleAccordion, openAccordion } = props;
+ const toggleAccordion = (id) => {
+    setOpenAccordion(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+   const [openAccordion, setOpenAccordion] = useState({
+       consigli:  false
+     });
 
   // 1. Creiamo lo stato per memorizzare il dato del form
-  const [consigliData, setConsigliData] = useState({
+  const [consigliData, setConsigliData] = useState(props.val==null?{
     consiglio_impegno: ''
-  });
+  }:JSON.parse(props.val.valore));
 
   // 2. Funzione per aggiornare lo stato mentre l'utente digita
   const handleInputChange = (e) => {
@@ -45,7 +53,7 @@ const Consigli = (props) => {
         <div className="accordion-header" onClick={() => toggleAccordion('consigli')}>
           <div className="header-title">
             <span className="icon">💡</span>
-            <h3>Consigli</h3>
+            <h3>Consigli {(location.pathname==="/storico" && props.val!=null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
           </div>
           <span className="toggle-icon">{openAccordion?.consigli ? '−' : '+'}</span>
         </div>
@@ -75,13 +83,17 @@ const Consigli = (props) => {
                   placeholder="Es: Da oggi proverò a mettere il telefono in un'altra stanza mentre studio..."
                   value={consigliData.consiglio_impegno}
                   onChange={handleInputChange}
+                  disabled={location.pathname==="/storico"?true:false}
+
                 ></textarea>
               </div>
 
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+                {location.pathname!=="/storico"?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#d69e2e', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva Impegno
                 </button>
+                :""}
               </div>
             </form>
           </div>
