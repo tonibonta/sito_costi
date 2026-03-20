@@ -17,4 +17,17 @@ Content-Type: application/json
 }
 
 
+POST http://localhost:3001/api/registrazione HTTP/1.1
+Content-Type: application/json
+
+
+{
+"email":"ttt@gmail.com",
+"password":"Helloword123!",
+"course":"judo"
+
+}
+
+
+
 DELETE http://localhost:3001/api/train/0 HTTP/1.1

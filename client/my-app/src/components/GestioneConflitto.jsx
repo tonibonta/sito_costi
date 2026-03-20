@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import API from './API';
+import { useLocation } from 'react-router';
 
-export const GestioneConflitto = () => {
+export const GestioneConflitto = (props) => {
+  
   const[openAccordion, setOpenAccordion] = useState({
     tuckman: false,
    
@@ -17,12 +19,15 @@ export const GestioneConflitto = () => {
   };
 
   return (
+    
     <div className="fade-in" style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 0' }}>
+     {location.pathname!=="/storico"?
       <div className="page-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <h2 style={{ color: 'var(--primary-dark)', fontSize: '2.2rem' }}>Gestione del conflitto</h2>
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Prendi l'iniziativa e crea il tuo percorso.</p>
       </div>
-      <QuestionarioConflitti openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      :""}
+      <QuestionarioConflitti openAccordion={openAccordion} toggleAccordion={toggleAccordion} val={props.val} user={props.user}/>
      
     </div>
   );
@@ -30,11 +35,15 @@ export const GestioneConflitto = () => {
 
 
 const QuestionarioConflitti = (props) => {
+ const [msg,setMsg]=useState(null);
+  const location=useLocation();
   const { toggleAccordion, openAccordion } = props;
 
   const [risposte, setRisposte] = useState({});
-  const [risultato, setRisultato] = useState(null);
-
+  const [risultato, setRisultato] = useState(props.val==null?null:JSON.parse(props.val.valore));
+  useEffect(()=>{
+    console.log(risultato)
+  })
   // Array delle domande con la mappatura esatta della tua matrice
   // mapA e mapB indicano a quale stile viene assegnato 1 punto se l'utente sceglie A o B.
   const domande = [
@@ -119,16 +128,19 @@ const QuestionarioConflitti = (props) => {
     const classifica = Object.entries(punteggi).sort((a, b) => b[1] - a[1]);
 
     setRisultato({ punteggi: classifica, dominanti: stiliDominanti, maxPunteggio });
+    console.log(JSON.stringify({"punteggi": classifica, "dominanti": stiliDominanti, "punti":maxPunteggio}))
      const ora = new Date();
     const attivita={
       date:ora,
       classe:"gestione_conflitto",
       tipo:"questionario_conflitto",
-      valore:JSON.stringify(risultato),
-      id_user:1
+      valore:JSON.stringify({"punteggi": classifica, "dominanti": stiliDominanti, "punti":maxPunteggio}),
+      id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+      
+        setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 
@@ -137,7 +149,7 @@ const QuestionarioConflitti = (props) => {
       <div className="accordion-header" onClick={() => toggleAccordion('questionarioConflitti')}>
         <div className="header-title">
           <span className="icon">📋</span>
-          <h3> Questionario</h3>
+          <h3> Questionario {(location.pathname==="/storico" && props.val!==null)?new Date(props.val.date).toLocaleDateString('it-IT',{  day: '2-digit',  month: '2-digit',   year: 'numeric',   hour: '2-digit',   minute: '2-digit'}):""}</h3>
         </div>
         <span className="toggle-icon">{openAccordion?.questionarioConflitti ? '−' : '+'}</span>
       </div>
@@ -151,7 +163,9 @@ const QuestionarioConflitti = (props) => {
           </div>
 
           <form onSubmit={calcolaRisultato} style={{ marginTop: '2rem' }}>
-            {domande.map((dom) => (
+            
+            {location.pathname!=="/storico"?
+            domande.map((dom) => (
               <div key={dom.id} style={{ marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #edf2f7' }}>
                 <div style={{ fontWeight: 'bold', color: '#2d3748', marginBottom: '0.8rem', fontSize: '1.1rem' }}>Domanda {dom.id}</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
@@ -165,7 +179,7 @@ const QuestionarioConflitti = (props) => {
                   </label>
                 </div>
               </div>
-            ))}
+            )):""}
 
             {risultato && (
               <div style={{ backgroundColor: '#f0fff4', padding: '1.5rem', borderRadius: '8px', marginTop: '2rem', border: '2px solid #38a169' }}>
@@ -215,9 +229,13 @@ const QuestionarioConflitti = (props) => {
             )}
 
             <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+              {location.pathname!=="/storico"?
+              msg==null?
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2b6cb0', border: 'none', padding: '1rem 2rem', color: 'white', borderRadius: '8px', fontWeight: 'bold', fontSize: '1.1rem', cursor: 'pointer', transition: 'background 0.3s' }}>
                 Calcola il tuo Stile
               </button>
+              : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
+              :""}
             </div>
           </form>
         </div>

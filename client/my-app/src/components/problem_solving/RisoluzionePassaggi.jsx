@@ -3,6 +3,7 @@ import API from '../API';
 import { useLocation } from 'react-router';
 
 const RisoluzionePassaggi = (props) => {
+   const [msg,setMsg]=useState(null);
   const location=useLocation();
  const toggleAccordion = (id) => {
    setOpenAccordion(prev => ({
@@ -50,7 +51,8 @@ const ora = new Date();
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+       setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 
@@ -113,10 +115,12 @@ const ora = new Date();
                 
 
                   {location.pathname!=="/storico"?
+                  msg==null?
 
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3182ce', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva Piano d'Azione
                 </button>
+                : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
                 :""}
               </div>
             </form>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import API from '../API';
 
 const AlberoProblemi = (props) => {
+   const [msg,setMsg]=useState(null);
  const toggleAccordion = (id) => {
    setOpenAccordion(prev => ({
      ...prev,
@@ -44,7 +45,8 @@ const ora = new Date();
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+       setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 
@@ -127,9 +129,11 @@ const ora = new Date();
                   {/* Cambiato type="button" in type="submit" */}
 
               {location.pathname!=="/storico"?
+              msg==null?
                   <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#38a169', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                     Salva l'Albero
                   </button>
+                    : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
                   :""}
                 </div>
               </form>

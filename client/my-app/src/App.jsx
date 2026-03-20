@@ -7,7 +7,8 @@ import { Home_layout,Dashboard_layout, GestioneTempo_layout,
     Comunicazione_layout,
     GestioneConflitti_layout,
     Storico_layout,LoginLayout,PageNotFound,
-    BibliografiaLayout} from './components/Layout'
+    BibliografiaLayout,
+    RegisterLayout} from './components/Layout'
 
 import {Routes ,Route,useLocation ,useNavigate,Navigate } from 'react-router'
 import './App.css'
@@ -141,6 +142,10 @@ const handleLogout = async () => {
       }></Route>
       <Route path='/login' element={
         <LoginLayout loggedIn={loggedIn} login={handleLogin}
+                                        user={user}/>
+      }></Route>
+       <Route path='/registrazione' element={
+        <RegisterLayout loggedIn={loggedIn} login={handleLogin} handleLogout={handleLogout}
                                         user={user}/>
       }></Route>
       <Route path='*' element={

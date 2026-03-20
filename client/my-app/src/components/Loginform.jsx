@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Loginform(props) {
   const [username, setUsername] = useState('');
@@ -109,6 +109,13 @@ function Loginform(props) {
             >
               Svuota campi
             </button>
+          </div>
+          {/* Link per tornare al login */}
+          <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.9rem', color: '#718096' }}>
+            Non hai un account?{' '}
+            <Link to="/registrazione" style={{ color: '#3182ce', textDecoration: 'none', fontWeight: '600' }}>
+              Clicca qui
+            </Link>
           </div>
 
         </form>

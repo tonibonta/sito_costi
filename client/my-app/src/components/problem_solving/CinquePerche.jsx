@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import API from '../API';
 const CinquePerche = (props) => {
+
+
+ const [msg,setMsg]=useState(null);
   const toggleAccordion = (id) => {
    setOpenAccordion(prev => ({
      ...prev,
@@ -46,7 +49,8 @@ const ora = new Date();
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+        setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 
@@ -150,9 +154,11 @@ const ora = new Date();
                 
 
                 {location.pathname!=="/storico"?
+                msg==null?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#805ad5', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva Analisi
                 </button>
+                   : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
                 :""}
               </div>
             </form>

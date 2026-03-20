@@ -17,6 +17,7 @@ import { Loginform } from './Loginform';
 import { Link, useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { Bibliografia } from './Bibliografia';
+import { Registerform } from './RegisterForm';
 
 
 
@@ -299,6 +300,25 @@ function LoginLayout(props){
 
 }
 
+function RegisterLayout(props){
+  return(
+    <>
+     <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
+   
+        <Registerform login={props.login} logout={props.logout}/>
+
+    </main>
+       <footer>
+        <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+          <Link to="/bibliografia">bibliografia</Link>
+      </footer>
+    
+    </>
+  );
+
+}
+
 function BibliografiaLayout(props){
   return(
     <>
@@ -321,6 +341,7 @@ function BibliografiaLayout(props){
 export {Home_layout,Dashboard_layout,GestioneTempo_layout,
         ProblemSolving_layout,AutoregolazioneEmotiva_layout,ValorizzazioneDiSe_layout,OrientamentoObiettivo_layout,
         Intraprendenza_layout,AttribuzioneCausale_layout,Resilienza_layout,
-        LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout,LoginLayout,PageNotFound,BibliografiaLayout
+        LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout,
+        LoginLayout,PageNotFound,BibliografiaLayout,RegisterLayout
 
 }

@@ -877,3 +877,15 @@ footer {
     transform: rotate(180deg);
     color: var(--primary-color);
 }
+
+/* Su schermi grandi (PC, Tablet), mostra i bottoni e nascondi la tendina */
+@media (min-width: 769px) {
+  .mobile-dropdown-container { display: none !important; }
+  .desktop-actions { display: flex !important; }
+}
+
+/* Su schermi piccoli (Smartphone), nascondi i bottoni e mostra la tendina */
+@media (max-width: 768px) {
+  .desktop-actions { display: none !important; }
+  .mobile-dropdown-container { display: block !important; }
+}

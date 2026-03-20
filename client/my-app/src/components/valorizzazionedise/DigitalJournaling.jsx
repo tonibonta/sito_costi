@@ -4,6 +4,9 @@ import API from '../API';
 
 // ATTIVITÀ 1: Digital Journaling
 const DigitalJournaling = (props) => {
+
+
+ const [msg,setMsg]=useState(null);
   
   const location=useLocation()
   // 1. Stato per l'array di tutte le annotazioni (quello che invieremo al server)
@@ -45,7 +48,8 @@ const ora = new Date();
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+       setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 
@@ -100,9 +104,12 @@ const ora = new Date();
             {entries.length > 0 && (
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 {location.pathname!=="/storico"?
+                msg==null?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2c7a7b', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva il Diario nel Database
-                </button>:""}
+                </button>
+                : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
+                :""}
               </div>
             )}
           </form>

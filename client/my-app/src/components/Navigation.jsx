@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css'; // Assicurati di importare il tuo CSS qui
+import '../App.css'; // Qui andremo ad aggiungere due righe di CSS
 import { Container } from 'react-bootstrap';
-import { LoginButton,LogoutButton } from './Loginform';
+import { LoginButton, LogoutButton } from './Loginform';
 
 const Navigation = (props) => {
+  // Stato per il menu hamburger (sinistra)
   const [isMenuActive, setIsMenuActive] = useState(false);
+  // Nuovo stato per la tendina (destra) su mobile
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
 
-  // Funzione per alternare lo stato del menu
-  const toggleMenu = () => {
-    setIsMenuActive(!isMenuActive);
-  };
+  const toggleMenu = () => setIsMenuActive(!isMenuActive);
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <>
@@ -26,65 +27,102 @@ const Navigation = (props) => {
             className="nav-container" 
             style={{ 
               display: 'flex', 
-              justifyContent: 'space-between', // Spinge gli elementi ai lati opposti
+              justifyContent: 'space-between', 
               alignItems: 'center', 
-              position: 'relative', 
-              height: '100%' 
             }}
           >
             {/* Sezione Sinistra: Menu Hamburger */}
-            <div style={{ zIndex: 2,}}>
+            
+            <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'flex-start' }}>
+              {props.user?
               <div 
                 className="menu-toggle" 
                 id="mobile-menu" 
                 onClick={toggleMenu} 
-                style={{ cursor: 'pointer', }}
+                style={{ cursor: 'pointer' }}
               >
                 <span className="bar"></span>
                 <span className="bar"></span>
                 <span className="bar"></span>
-                
               </div>
-              
+              :""}
             </div>
 
             {/* Sezione Centrale: Titolo */}
             <h1 style={{ 
-              position: 'absolute', 
-              left: '50%', 
-              transform: 'translateX(-50%)', 
               margin: 0,
-              fontSize: '2rem',
-              whiteSpace: 'nowrap',
-              zIndex: 1 
+              
+              fontSize: '1.8rem',
+              textAlign: 'center',
+              whiteSpace: 'nowrap'
             }}>
               Soft Skills Lab
             </h1>
 
-            {/* Sezione Destra: Pulsanti Home e Dashboard */}
-            <div style={{ display: 'flex', gap: '15px', zIndex: 2 }}>
-              <Link 
-                to="/" 
-                className="btn btn-outline-primary btn-sm"
-                style={{ backgroundColor: "transparent",color:"white",boxShadow:"none",marginLeft:"10%"}}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/storico" 
-                className="btn btn-outline-primary btn-sm"
-                style={{  backgroundColor: "transparent",color:"white",boxShadow:"none"}}
-              >
-                Dashboard
-              </Link>
+            {/* Sezione Destra: Pulsanti (PC) o Tendina (Mobile) */}
+            <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'flex-end' }}>
               
-               {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}
+              {/* --- VISTA PC (nascosta su mobile) --- */}
+              
+              <div className="desktop-actions" style={{ display: 'flex', gap: '15px' }}>
+                {props.user?
+                <>
+                <Link to="/" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                  Home
+                </Link>
+                <Link to="/storico" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                  Dashboard
+                </Link></>:""}
+               {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}  
+              </div>
+             
+              {/* --- VISTA SMARTPHONE (nascosta su PC) --- */}
+              <div className="mobile-dropdown-container" style={{ position: 'relative' }}>
+                {/* Icona dei 3 pallini per aprire la tendina */}
+                <button 
+                  onClick={toggleDropdown}
+                  style={{ background: 'transparent', border: 'none', color: 'white', fontSize: '1.5rem', cursor: 'pointer', padding: '0 5px' }}
+                >
+                  ⋮
+                </button>
+                
+                {/* Il menu a tendina vero e proprio */}
+                {isDropdownOpen && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: -15,
+                    marginTop: '5px',
+                    backgroundColor: '#255eb9ff', /* Sfondo scuro per far risaltare il testo bianco dei tuoi bottoni */
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                    
+                    display: 'flex',
+                    flexDirection: 'column',
+                    
+                    minWidth: '100px',
+                    zIndex: 10
+                  }}>
+                    {props.user?<>
+                    <Link to="/" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                      Home
+                    </Link>
+                    <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                      Dashboard
+                    </Link></>:""}
+                    <div onClick={() => setIsDropdownOpen(false)}>
+                      {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}
+                    </div>
+                  </div>
+                )}
+              </div>
+
             </div>
 
           </div>
         </header>
 
-        {/* Menu laterale a comparsa */}
+      {/* Menu laterale a comparsa */}
         <nav className={`sidebar ${isMenuActive ? 'active' : ''}`} id="sidebar">
           <div className="sidebar-header">
             <h2>Menu</h2>

@@ -72,7 +72,7 @@ const isLoggedIn = (req, res, next) => {
 function clientUserInfo(req) {
   const user=req.user;
   
-	return {id: user.id, name: user.name, surname:user.surname,email:user.email,course:user.course};
+	return {id: user.id,email:user.email,course:user.course};
 }
 
 app.post('/api/sessions', function(req, res, next) {
@@ -114,7 +114,24 @@ app.delete('/api/sessions/current', isLoggedIn, (req, res) => {
 });
 
 
+app.post('/api/registrazione',[check('email').isEmail(),
+  check('course').notEmpty(),
+  check('password').isLength({ min: 8 })],(req,res)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // Restituiamo 400 Bad Request con la lista degli errori
+   console.log("hello")
+    return res.status(400).json({ errors: errors.array() });
+   
+  }
+ 
+  userDao.registrazione(req.body).then((risultato)=>{
+    console.log(risultato)
+    res.send({"risultato":risultato});
 
+  })
+
+})
 
 
 app.get('/api/attivita/:id',isLoggedIn,(req,res)=>{

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 // ATTIVITÀ 1: Goal Setter (Metodo SMART)
 const GoalSetter = (props) => {
-  // 1. Stato per memorizzare i dati dell'obiettivo
+   const [msg,setMsg]=useState(null);
   const location=useLocation();
   const [goal, setGoal] = useState(props.val==null?{ vago: '', S: '', M: '', A: '', R: '', T: '' }:JSON.parse(props.val.valore));
   const [showCard, setShowCard] = useState(false);
@@ -44,7 +44,8 @@ const GoalSetter = (props) => {
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+      setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 
@@ -87,9 +88,11 @@ const GoalSetter = (props) => {
                   
                   {/* Cambiato in type="submit" */}
                   {location.pathname!=="/storico"?
+                  msg==null?
                   <button type="submit" className="btn" style={{ marginTop: '15px', backgroundColor: '#38b2ac', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
                     Genera Scheda e Salva
                   </button>
+: <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
                   :""}
                 </div>
               )}

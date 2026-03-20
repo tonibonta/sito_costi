@@ -39,6 +39,20 @@ const logIn = async (credentials) => {
     }).catch((err=>{console.log(err)}));
     
   };
+const registrazione = async (credentials) => {
+
+    return fetch(SERVER_URL + 'registrazione', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      
+      body: JSON.stringify(credentials),
+    }).then(response=>response.json()).then(data=>{
+      return data;
+    }).catch((err=>{console.log(err)}));
+    
+  };
   
   /**
    * This function is used to verify if the user is still logged-in.
@@ -96,6 +110,6 @@ const logIn = async (credentials) => {
 
 
 
-const API={storeAttivita,getAll,getUserInfo,logIn,logOut,};
+const API={storeAttivita,getAll,getUserInfo,logIn,logOut,registrazione};
 export default API;
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import API from '../API';
 
 const SfideGiornaliere = (props) => {
+   const [msg,setMsg]=useState(null);
   const { toggleAccordion, openAccordion } = props;
 
   const[sfidaAttuale, setSfidaAttuale] = useState(null);
@@ -40,7 +41,8 @@ const SfideGiornaliere = (props) => {
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+       setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
 

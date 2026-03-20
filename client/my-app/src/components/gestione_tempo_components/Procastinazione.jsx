@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import API from '../API';
 
 const Procastinazione = (props) => {
+
+
+ const [msg,setMsg]=useState(null);
+
  const toggleAccordion = (id) => {
     setOpenAccordion(prev => ({
       ...prev,
@@ -41,7 +45,8 @@ const Procastinazione = (props) => {
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+       setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     })
 
   };
@@ -92,13 +97,18 @@ const Procastinazione = (props) => {
               </div>
 
 
-              {location.pathname!=="/storico"?
+              
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
+              {location.pathname!=="/storico"?
+              msg==null?
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#38b2ac', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva la tua Rana
                 </button>
-              </div>
+                 : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
               :""}
+              
+              </div>
+            
             </form>
           </div>
         </div>

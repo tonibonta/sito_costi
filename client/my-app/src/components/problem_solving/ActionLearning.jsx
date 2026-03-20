@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 
 const ActionLearning = (props) => {
  const location=useLocation();
+ const [msg,setMsg]=useState(null);
 
 const toggleAccordion = (id) => {
    setOpenAccordion(prev => ({
@@ -47,7 +48,8 @@ const ora = new Date();
       id_user:props.user.id
     }
     API.storeAttivita(attivita).then((data)=>{
-      console.log(data);
+     setMsg("Completato!");
+     setTimeout(()=>{setMsg(null)},4000);
     });
   };
   
@@ -123,9 +125,11 @@ const ora = new Date();
 
             <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
               {location.pathname!=="/storico"?
+              msg==null?
               <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#d53f8c', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                 Salva Riflessioni di Gruppo
               </button>
+                 : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
               :""}
             </div>
 

@@ -394,14 +394,66 @@ const Storico = (props) => {
             </div>
           </div>
           </div>
-        <div style={{
+   <div style={{
           backgroundColor: 'var(--card-bg)',
           borderRadius: '12px',
           boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
           marginBottom: '1.5rem',
           overflow: 'hidden'
          }}>
+          
+          {/* Intestazione Cliccabile della Categoria */}
+          <div 
+            onClick={() => toggleCategory('gestioneconflitto')} 
+            style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              padding: '1.5rem 2rem', 
+              cursor: 'pointer', 
+              backgroundColor: openCategory.gestioneconflitto ? '#f8fafc' : 'white',
+              transition: 'background-color 0.3s ease',
+              borderBottom: openCategory.gestioneconflitto ? '1px solid #edf2f7' : 'none'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            
+              <h3 style={{ color: 'var(--primary-dark)', fontSize: '1.4rem', margin: 0 }}>
+                Gestione del Conflitto
+              </h3>
+            </div>
+            <span style={{ 
+              fontSize: '1.8rem', 
+              color: 'var(--primary-color)', 
+              transition: 'transform 0.3s ease',
+              transform: openCategory.gestioneconflitto ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}>
+              ▼
+            </span>
           </div>
+
+          {/* Contenuto della Categoria (Lista Questionari) con animazione fluida */}
+          <div style={{
+            display: 'grid',
+            gridTemplateRows: openCategory.gestioneconflitto ? '1fr' : '0fr',
+            transition: 'grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            backgroundColor: '#fafbfc'
+          }}>
+            <div style={{ overflow: 'hidden', minHeight: 0 }}>
+              
+              {/* Box interno con padding */}
+              <div style={{ padding: '2rem' }}>
+                {categoria.filter(val=>val.tipo==="questionario_conflitto").map(val=>{
+                    return  <GestioneConflitto key={val.id} val={val}/>
+                })}
+               
+              
+
+              </div>
+
+            </div>
+          </div>
+        </div>
          </div>
     </>
   );
