@@ -171,7 +171,7 @@ header:hover {
     padding-left: 2%;
     padding-right: 2%;
     margin: 0 auto;
-    max-width: 2000px;
+    max-width: 1400px;
     position: relative;
     z-index: 1;
 }
@@ -681,7 +681,7 @@ main {
 }
 
 .skill-card-back p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 400;
     line-height: 1.7;
     opacity: 0.95;
