@@ -57,6 +57,11 @@ app.use(session({
   secret: "LXBSMDTMSP2I5XFXIYRGFVWSFI",
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: true,        // Obbligatorio su Render (HTTPS)
+    sameSite: 'none',    // Permette l'invio tra Vercel e Render
+    httpOnly: true
+  }
 }));
 app.use(passport.authenticate('session'));
 
