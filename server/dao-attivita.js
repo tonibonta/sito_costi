@@ -69,16 +69,15 @@ exports.storeAttivita=(attivita)=>{
 
 
 
-
-exports.deletebyid=(user,reservation)=>{
+exports.deleteAttivita=(attivita)=>{
     return new Promise((resolve,reject)=>{
-        db.run("delete from train where user=? and reservation=?",[user,reservation],(err)=>{
+         db.run("delete from attivita where id=? and id_user=?",[attivita.id,attivita.id_user],(err)=>{
             if(err){
                 reject(err);
             }else{
-                resolve({msg:"Deleted",type:"success"});
+                resolve("Delete done");
             }
         })
-    })
+})
 }
 

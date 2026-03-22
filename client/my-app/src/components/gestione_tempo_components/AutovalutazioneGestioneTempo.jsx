@@ -216,7 +216,8 @@ const toggleAccordion = (id) => {
                 : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   {msg}
                 </button>
-                   :""}
+                 : <button type="button" onClick={()=>props.handleDelete(props.val)} className="btn " style={{ backgroundColor: '#910202ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Cancella</button>
+                   }
               </div>
              
             </form>

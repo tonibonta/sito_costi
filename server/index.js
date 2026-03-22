@@ -155,10 +155,27 @@ app.get('/api/attivita/tipo/:tipo',isLoggedIn,(req,res)=>{
     
 });
 app.post('/api/attivita/',isLoggedIn,(req,res)=>{
+    if(req.user.id==req.body.id_user){
     const attivita=req.body;
     attivitadao.storeAttivita(attivita).then((result)=>{
+      console.log("delete done")
         res.send({"risultato":result});
-    })
+    })}else{
+        res.send({"risultato":"Errore "});
+
+
+    }
+})
+
+app.delete('/api/attivita/',isLoggedIn,(req,res)=>{
+  if(req.user.id==req.body.id_user){
+    const attivita=req.body;
+    attivitadao.deleteAttivita(attivita).then((result)=>{
+        res.send({"risultato":result});
+    })}else{
+        res.send({"risultato":"Errore"});
+
+    }
 })
 const PORT = process.env.PORT || 3001;
 app.listen(PORT,()=>{

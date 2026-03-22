@@ -25,7 +25,8 @@ const DigitalJournaling = (props) => {
     };
 
   // 2. Aggiunge temporaneamente la nota alla lista locale
-  const handleAddEntry = () => {
+  const handleAddEntry = (e) => {
+    e.preventDefault()
     if (newEntry.trim() !== '') {
       setEntries([...entries, { text: newEntry, date: new Date().toLocaleDateString() }]);
       setNewEntry('');
@@ -35,7 +36,7 @@ const DigitalJournaling = (props) => {
   // 3. Funzione che intercetta il salvataggio per l'invio al server
   const handleSubmit = (e) => {
     e.preventDefault(); // Evita il ricaricamento della pagina
-    
+    if(entries.length>0){
     // Ecco il tuo array completo di annotazioni pronto per il database!
     console.log("Dati del Digital Journaling pronti per il server:", entries);
     
@@ -50,7 +51,7 @@ const ora = new Date();
     API.storeAttivita(attivita).then((data)=>{
        setMsg("Completato!");
      setTimeout(()=>{setMsg(null)},4000);
-    });
+    });}
   };
 
   return (
@@ -68,7 +69,7 @@ const ora = new Date();
           <p style={{ color: '#4a5568', marginBottom: '1rem' }}>Annota qui ogni giorno i tuoi piccoli e grandi successi clinici e personali.</p>
           
           {/* Aggiunto il form per gestire l'invio finale al server */}
-          <form onSubmit={handleSubmit}>
+          <form >
             {location.pathname!=="/storico"?
             <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem' }}>
               <input 
@@ -80,7 +81,7 @@ const ora = new Date();
               />
               {/* Reso esplicitamente type="button" per evitare che faccia il submit della pagina */}
               <button 
-                type="button" 
+                type="submit" 
                 onClick={handleAddEntry} 
                 className="btn btn-primary" 
                 style={{ backgroundColor: '#38b2ac', border: 'none', padding: '10px 20px', color: 'white', borderRadius: '5px', cursor: 'pointer' }}
@@ -105,11 +106,12 @@ const ora = new Date();
               <div className="form-actions" style={{ marginTop: '2rem', textAlign: 'right' }}>
                 {location.pathname!=="/storico"?
                 msg==null?
-                <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2c7a7b', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                <button type="button"  onClick={handleSubmit} className="btn btn-primary" style={{ backgroundColor: '#2c7a7b', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Salva il Diario nel Database
                 </button>
-                : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
-                :""}
+                : <button type="button" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
+                 : <button type="button" onClick={()=>props.handleDelete(props.val)} className="btn " style={{ backgroundColor: '#910202ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Cancella</button>
+                }
               </div>
             )}
           </form>

@@ -27,7 +27,7 @@ export const GestioneConflitto = (props) => {
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Prendi l'iniziativa e crea il tuo percorso.</p>
       </div>
       :""}
-      <QuestionarioConflitti openAccordion={openAccordion} toggleAccordion={toggleAccordion} val={props.val} user={props.user}/>
+      <QuestionarioConflitti openAccordion={openAccordion} toggleAccordion={toggleAccordion} val={props.val} user={props.user} handleDelete={props.handleDelete}/>
      
     </div>
   );
@@ -235,7 +235,8 @@ const QuestionarioConflitti = (props) => {
                 Calcola il tuo Stile
               </button>
               : <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#2d9102ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>{msg}</button>
-              :""}
+                 : <button type="button" onClick={()=>props.handleDelete(props.val)} className="btn " style={{ backgroundColor: '#910202ff', border: 'none', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Cancella</button>
+              }
             </div>
           </form>
         </div>

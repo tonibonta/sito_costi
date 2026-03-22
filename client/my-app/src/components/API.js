@@ -12,6 +12,16 @@ console.log(data);
 return data;
 }
 
+const deleteAttivita=async(attivita)=>{
+   const request =`${SERVER_URL}attivita`;
+   const response=await fetch(request,{method: 'DELETE',headers: {
+    'Content-Type': 'application/json',
+  },credentials:'include',body:JSON.stringify(attivita)});
+const data = await response.json();
+console.log(data);
+return data;
+}
+
 const getAll=async(id)=>{
   const request =`${SERVER_URL}attivita/${id}`;
    const response=await fetch(request,{method: 'GET',headers: {
@@ -110,6 +120,6 @@ const registrazione = async (credentials) => {
 
 
 
-const API={storeAttivita,getAll,getUserInfo,logIn,logOut,registrazione};
+const API={storeAttivita,getAll,getUserInfo,logIn,logOut,registrazione,deleteAttivita};
 export default API;
 

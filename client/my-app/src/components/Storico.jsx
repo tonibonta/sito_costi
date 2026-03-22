@@ -46,13 +46,20 @@ const Storico = (props) => {
             window.scrollTo(0, 0);
         }, 0);
       
-    });
-    
-   
-
-      
+    });  
   },[]); 
+ const handleDelete=(val)=>{
 
+  API.deleteAttivita(val).then((data)=>{
+    console.log(data);
+     API.getAll(props.user.id).then((data)=>{
+        setCategoria(data);
+        setTimeout(() => {
+            window.scrollTo(0, 600);
+        }, 0);
+      });
+  })
+ }
   // Funzione per aprire/chiudere la Categoria
   const toggleCategory = (id) => {
     setOpenCategory(prev => ({
@@ -119,24 +126,24 @@ const Storico = (props) => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
                 {categoria.filter(val=>val.tipo==="questionario_autovalutativo").map(val=>{
-                    return  <AutovalutazioneGestioneTempo key={val.id} val={val}/>
+                    return  <AutovalutazioneGestioneTempo key={val.id} val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="modello_smart").map(val=>{
-                    return  <ModelloSmart key={val.id} val={val}/>
+                    return  <ModelloSmart key={val.id} val={val} handleDelete={handleDelete}/>
                 })}
                 
                 {categoria.filter(val=>val.tipo==="matrice_eisenhower").map(val=>{
-                    return  <MatriceEisenhower key={val.id} val={val}/>
+                    return  <MatriceEisenhower key={val.id} val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="tecnica_pomodoro").map(val=>{
-                    return  <TecnicaPomodoro key={val.id}val={val}/>
+                    return  <TecnicaPomodoro key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="procastinazione").map(val=>{
-                    return  <Procastinazione key={val.id}val={val}/>
+                    return  <Procastinazione key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 
                 {categoria.filter(val=>val.tipo==="consigli").map(val=>{
-                    return  <Consigli key={val.id} val={val}/>
+                    return  <Consigli key={val.id} val={val} handleDelete={handleDelete}/>
                 })}
               
 
@@ -196,17 +203,17 @@ const Storico = (props) => {
               <div style={{ padding: '2rem' }}>
    
                   {categoria.filter(val=>val.tipo==="cinque_perche").map(val=>{
-                    return  <CinquePerche key={val.id}val={val}/>
+                    return  <CinquePerche key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="albero_problemi").map(val=>{
-                    return  <AlberoProblemi key={val.id}val={val}/>
+                    return  <AlberoProblemi key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="risoluzione_passaggi").map(val=>{
-                    return  <RisoluzionePassaggi key={val.id}val={val}/>
+                    return  <RisoluzionePassaggi key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 
                 {categoria.filter(val=>val.tipo==="action_learning").map(val=>{
-                    return  <ActionLearning key={val.id}val={val}/>
+                    return  <ActionLearning key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
               </div>
 
@@ -263,13 +270,13 @@ const Storico = (props) => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
        {categoria.filter(val=>val.tipo==="diario_emotivo").map(val=>{
-                    return  <DiarioEmotivo key={val.id}val={val}/>
+                    return  <DiarioEmotivo key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="coping_questionario").map(val=>{
-                    return  <Coping key={val.id}val={val}/>
+                    return  <Coping key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
                 {categoria.filter(val=>val.tipo==="coping_sfide").map(val=>{
-                    return  <CopingStrategie key={val.id}val={val}/>
+                    return  <CopingStrategie key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
         
               </div>
@@ -327,7 +334,7 @@ const Storico = (props) => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
        {categoria.filter(val=>val.tipo==="digital_journaling").map(val=>{
-                    return  <DigitalJournaling key={val.id}val={val}/>
+                    return  <DigitalJournaling key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
   
               </div>
@@ -386,7 +393,7 @@ const Storico = (props) => {
               <div style={{ padding: '2rem' }}>
    
                    {categoria.filter(val=>val.tipo==="goal_setter").map(val=>{
-                    return  <GoalSetter key={val.id}val={val}/>
+                    return  <GoalSetter key={val.id}val={val} handleDelete={handleDelete}/>
                 })}
    
               </div>
@@ -444,7 +451,7 @@ const Storico = (props) => {
               {/* Box interno con padding */}
               <div style={{ padding: '2rem' }}>
                 {categoria.filter(val=>val.tipo==="questionario_conflitto").map(val=>{
-                    return  <GestioneConflitto key={val.id} val={val}/>
+                    return  <GestioneConflitto key={val.id} val={val} handleDelete={handleDelete}/>
                 })}
                
               
