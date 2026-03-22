@@ -30,7 +30,7 @@ const getAll=async(id)=>{
   },credentials:'include'});
 const data = await response.json();
 
-return data;
+return data.attivita;
   
 }
 

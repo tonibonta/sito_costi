@@ -41,7 +41,12 @@ const Storico = (props) => {
   useEffect(() => {
     document.title = "Storico - Soft Skills Rehab UniTo";
     API.getAll(props.user.id).then((data)=>{
-        setCategoria(data);
+      
+        if(data!="empty"){
+        console.log("c")
+        setCategoria(data);}else{
+          setCategoria([]);
+        }
         setTimeout(() => {
             window.scrollTo(0, 0);
         }, 0);
@@ -53,10 +58,12 @@ const Storico = (props) => {
   API.deleteAttivita(val).then((data)=>{
     console.log(data);
      API.getAll(props.user.id).then((data)=>{
-        setCategoria(data);
-        setTimeout(() => {
-            window.scrollTo(0, 600);
-        }, 0);
+          if(data!="empty"){
+        console.log("c")
+        setCategoria(data);}else{
+          setCategoria([]);
+        }
+
       });
   })
  }

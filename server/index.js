@@ -120,7 +120,7 @@ app.post('/api/registrazione',[check('email').isEmail(),
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     // Restituiamo 400 Bad Request con la lista degli errori
-   console.log("hello")
+
     return res.status(400).json({ errors: errors.array() });
    
   }
@@ -135,10 +135,13 @@ app.post('/api/registrazione',[check('email').isEmail(),
 
 
 app.get('/api/attivita/:id',isLoggedIn,(req,res)=>{
+   if(req.user.id==req.params.id){
     attivitadao.getAll(req.params.id).then((attivita)=>{
         console.log(attivita);
-        res.send(attivita)
-    })
+        res.send({"attivita":attivita})
+    })}else{
+      res.send({"attivita":"errore"})
+    }
     
 });
 app.get('/api/attivita/classe/:classe',isLoggedIn,(req,res)=>{
@@ -158,7 +161,7 @@ app.post('/api/attivita/',isLoggedIn,(req,res)=>{
     if(req.user.id==req.body.id_user){
     const attivita=req.body;
     attivitadao.storeAttivita(attivita).then((result)=>{
-      console.log("delete done")
+     
         res.send({"risultato":result});
     })}else{
         res.send({"risultato":"Errore "});
@@ -171,6 +174,8 @@ app.delete('/api/attivita/',isLoggedIn,(req,res)=>{
   if(req.user.id==req.body.id_user){
     const attivita=req.body;
     attivitadao.deleteAttivita(attivita).then((result)=>{
+       console.log("delete done");
+     
         res.send({"risultato":result});
     })}else{
         res.send({"risultato":"Errore"});
