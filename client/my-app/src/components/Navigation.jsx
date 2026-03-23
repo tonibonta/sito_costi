@@ -113,7 +113,7 @@ const Navigation = (props) => {
                     <Link to="/" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
                       HOME
                     </Link>
-                    <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                    <Link to="/lab" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
                       IL LAB
                     </Link>
                     <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
