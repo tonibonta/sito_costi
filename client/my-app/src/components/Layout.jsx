@@ -18,6 +18,7 @@ import { Link, useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { Bibliografia } from './Bibliografia';
 import { Registerform } from './RegisterForm';
+import { Lab } from './Lab';
 
 
 
@@ -337,11 +338,29 @@ function BibliografiaLayout(props){
   );
 
 }
+function LabLayout(props){
+  return(
+    <>
+     <Navigation user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+    <main className="fade-in">
+   
+        <Lab user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}/>
+
+    </main>
+       <footer>
+        <p>&copy; 2024 Progetto Soft Skills - Professioni Sanitarie Riabilitative Università di Torino.</p>
+        <Link to="/bibliografia">bibliografia</Link>
+      </footer>
+    
+    </>
+  );
+
+}
 
 export {Home_layout,Dashboard_layout,GestioneTempo_layout,
         ProblemSolving_layout,AutoregolazioneEmotiva_layout,ValorizzazioneDiSe_layout,OrientamentoObiettivo_layout,
         Intraprendenza_layout,AttribuzioneCausale_layout,Resilienza_layout,
         LavoriInGruppo_layout,Comunicazione_layout,GestioneConflitti_layout,Storico_layout,
-        LoginLayout,PageNotFound,BibliografiaLayout,RegisterLayout
+        LoginLayout,PageNotFound,BibliografiaLayout,RegisterLayout,LabLayout
 
 }

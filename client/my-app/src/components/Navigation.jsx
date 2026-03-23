@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css'; // Qui andremo ad aggiungere due righe di CSS
 import { Container } from 'react-bootstrap';
 import { LoginButton, LogoutButton } from './Loginform';
-
+import logoImg from "../assets/logo.png"
 const Navigation = (props) => {
   // Stato per il menu hamburger (sinistra)
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -33,8 +33,8 @@ const Navigation = (props) => {
           >
             {/* Sezione Sinistra: Menu Hamburger */}
             
-            <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'flex-start' }}>
-              {props.user?
+            <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'center'}}>
+              {/*props.user?
               <div 
                 className="menu-toggle" 
                 id="mobile-menu" 
@@ -45,33 +45,38 @@ const Navigation = (props) => {
                 <span className="bar"></span>
                 <span className="bar"></span>
               </div>
-              :""}
+              :""*/}
+                  {props.user?
+                <>
+                <Link to="/" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                  HOME
+                </Link>
+                <Link to="/lab" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                  IL LAB
+                </Link></>:""}
             </div>
 
             {/* Sezione Centrale: Titolo */}
             <h1 style={{ 
               margin: 0,
-              
-              fontSize: '1.8rem',
+            
               textAlign: 'center',
               whiteSpace: 'nowrap'
             }}>
-              Soft Skills Lab
+               <img style={{width:"200px",marginTop:"10px"}} src={logoImg} />
             </h1>
 
             {/* Sezione Destra: Pulsanti (PC) o Tendina (Mobile) */}
-            <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'center' }}>
               
               {/* --- VISTA PC (nascosta su mobile) --- */}
               
               <div className="desktop-actions" style={{ display: 'flex', gap: '15px' }}>
                 {props.user?
                 <>
-                <Link to="/" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                  Home
-                </Link>
+              
                 <Link to="/storico" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                  Dashboard
+                  PROFILO
                 </Link></>:""}
                {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}  
               </div>

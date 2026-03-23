@@ -69,9 +69,9 @@ function Loginform(props) {
               Email Istituzionale
             </label>
             <input 
-              type="email" 
+              type="text" 
               id="username"
-              placeholder="mario.rossi@edu.unito.it" 
+              placeholder="123456" 
               value={username} 
               onChange={event => setUsername(event.target.value)} 
               style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px', fontFamily: 'var(--font-family)' }}
@@ -132,7 +132,7 @@ function LogoutButton(props) {
       onClick={props.logout}
       className="btn btn-outline-primary btn-sm"
      style={{  backgroundColor: "transparent",color:"white",boxShadow:"none",border:"none"}}  >
-      Esci
+      ESCI
     </button>
   );
 }
@@ -145,7 +145,7 @@ function LoginButton(props) {
       style={{  backgroundColor: "transparent",color:"white",boxShadow:"none",border:"none"}}
       onClick={() => navigate('/login')}
      >
-      Accedi
+      ACCEDI
     </button>
   );
 }

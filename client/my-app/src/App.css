@@ -7,13 +7,13 @@
 
 :root {
     /* Colori originali mantenuti e arricchiti */
-    --primary-color: #2b6cb0;
-    --primary-dark: #1e4b82;
-    --primary-light: #4299e1;
-    --secondary-color: #38a169;
-    --secondary-light: #48bb78;
-    --secondary-dark: #2f855a;
-    
+    --primary-color: #3A5F67;
+    --primary-dark: #3A5F67;
+    --primary-light: #3A5F67;
+    --secondary-color: #296a79;
+    --secondary-light: #296a79;
+    --secondary-dark: #296a79;
+    --transition-bounce: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     /* Sfondi moderni */
     --background-color: #f0f4f8;
     --background-gradient: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 50%, #edf2f7 100%);
@@ -26,7 +26,7 @@
     --text-light: #a0aec0;
     
     /* Accent colors derivati dalla palette */
-    --accent-blue: #3182ce;
+    --accent-blue: #3A5F67;
     --accent-cyan: #0bc5ea;
     --accent-teal: #38b2ac;
     
@@ -139,6 +139,7 @@ body {
 ========================================= */
 
 header {
+  
     background: var(--glass-bg);
     backdrop-filter: var(--blur-amount);
     -webkit-backdrop-filter: var(--blur-amount);
@@ -481,7 +482,8 @@ main {
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
-    transition: var(--transition-bounce);
+    /* Transizione fluida fondamentale per il movimento */
+    transition: var(--transition-bounce); 
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     border: 2px solid transparent;
     position: relative;
@@ -490,40 +492,17 @@ main {
     animation: fadeIn 0.8s ease-out 0.4s both;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-light) 100%);
-    transition: left 0.4s ease;
-    z-index: -1;
-}
-
-.btn::after {
-    content: '→';
-    margin-left: 0.5rem;
-    transition: transform 0.3s ease;
-}
-
 .btn:hover {
+    /* Sale leggermente (-5px invece di -15px) e scala pochissimo per non sgranare */
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(43, 108, 176, 0.25), var(--shadow-green);
-    color: white;
-    border-color: rgba(255,255,255,0.5);
-}
-
-.btn:hover::before {
-    left: 0;
-}
-
-.btn:hover::after {
-    transform: translateX(5px);
+    /* Rimuovi font-size qui per evitare scatti nel testo */
+    
+    /* Aumentiamo l'ombra mentre sale per dare profondità */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
 .btn:active {
+    /* Quando clicchi, torna quasi alla posizione originale */
     transform: translateY(-2px) scale(0.98);
 }
 
@@ -542,26 +521,15 @@ main {
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
+    
     animation: fadeIn 0.6s ease-out;
+    
 }
 
-.info-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--secondary-color), var(--secondary-light), var(--primary-color));
-    background-size: 200% 100%;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-    animation: border-flow 3s linear infinite;
-}
+
 
 .info-section:hover {
-    transform: translateY(-8px);
+    
     box-shadow: 0 30px 60px rgba(43, 108, 176, 0.15);
     border-color: rgba(43, 108, 176, 0.2);
 }
@@ -577,22 +545,18 @@ main {
     font-weight: 700;
     display: flex;
     align-items: center;
+  
     gap: 0.75rem;
 }
 
-.info-section h3::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: var(--secondary-color);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(56, 161, 105, 0.2);
-}
+
 
 /* =========================================
    FLIP CARDS 3D - EFFETTI AVANZATI
 ========================================= */
-
+.info-section p {
+    font-size: 20px;
+}
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -639,8 +603,8 @@ main {
 .skill-card-front {
     background: var(--glass-bg);
     backdrop-filter: var(--blur-amount);
-    color: var(--text-color);
-    border-bottom: 4px solid var(--secondary-color);
+    color: "white";
+  
     transition: var(--transition-smooth);
 }
 
@@ -651,22 +615,11 @@ main {
 .skill-card-front h4 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    
     position: relative;
 }
 
-.skill-card-front h4::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 3px;
-    background: var(--secondary-color);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-}
+
 
 .skill-card:hover .skill-card-front h4::after {
     width: 60px;
@@ -674,7 +627,7 @@ main {
 
 /* RETRO: Gradiente sanitario */
 .skill-card-back {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    
     color: white;
     transform: rotateY(180deg);
     border: 1px solid rgba(255,255,255,0.3);
@@ -1089,7 +1042,7 @@ footer::before {
 .btn-primary:hover {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
     box-shadow: 0 10px 30px rgba(43, 108, 176, 0.4);
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 .btn-secondary {

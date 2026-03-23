@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StiliAttributivi } from './attribuzionecausale/StiliAttributivi';
+import { Negativopositivo } from './attribuzionecausale/Negativopositivo';
 
 
 export const AttribuzioneCausale = (props) => {
@@ -22,6 +23,8 @@ export const AttribuzioneCausale = (props) => {
         <p style={{ color: '#718096', fontSize: '1.1rem' }}>Comprendi come spieghi a te stesso i successi e i fallimenti.</p>
       </div>
       <StiliAttributivi  user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+      <Negativopositivo  user={props.user} loggedIn={props.loggedIn}logOut={props.handleLogout}openAccordion={openAccordion} toggleAccordion={toggleAccordion}/>
+
     </div>
   );
 };

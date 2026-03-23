@@ -99,12 +99,12 @@ function Registerform(props) {
           {/* Email */}
           <div className="form-group" style={{ marginBottom: '1.2rem' }}>
             <label htmlFor="email" style={{ display: 'block', fontWeight: '600', color: 'var(--text-color)', marginBottom: '0.5rem' }}>
-              Email Istituzionale
+              Matricola
             </label>
             <input 
-              type="email" 
+              type="text" 
               id="email"
-              placeholder="mario.rossi@edu.unito.it" 
+              placeholder="123456" 
               value={email} 
               onChange={event => setEmail(event.target.value)} 
               style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px', fontFamily: 'var(--font-family)' }}

@@ -8,7 +8,8 @@ import { Home_layout,Dashboard_layout, GestioneTempo_layout,
     GestioneConflitti_layout,
     Storico_layout,LoginLayout,PageNotFound,
     BibliografiaLayout,
-    RegisterLayout} from './components/Layout'
+    RegisterLayout,
+    LabLayout} from './components/Layout'
 
 import {Routes ,Route,useLocation ,useNavigate,Navigate } from 'react-router'
 import './App.css'
@@ -84,6 +85,10 @@ const handleLogout = async () => {
         <BibliografiaLayout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
+       <Route path='/lab' element={loggedIn?
+        <LabLayout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
+                                        user={user}/>
+      }></Route>
       
        <Route path='/gestione-tempo' element={loggedIn?
         <GestioneTempo_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
@@ -123,7 +128,7 @@ const handleLogout = async () => {
         <Resilienza_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
-        <Route path='/lavoriingruppo' element={loggedIn?
+        <Route path='/lavori-in-gruppo' element={loggedIn?
         <LavoriInGruppo_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
@@ -131,7 +136,7 @@ const handleLogout = async () => {
         <Comunicazione_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
-       <Route path='/gestioneconflitto' element={loggedIn?
+       <Route path='/gestione-conflitto' element={loggedIn?
         <GestioneConflitti_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
@@ -144,6 +149,7 @@ const handleLogout = async () => {
         <LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
+      
        <Route path='/registrazione' element={
         <RegisterLayout loggedIn={loggedIn} login={handleLogin} handleLogout={handleLogout}
                                         user={user}/>
