@@ -66,7 +66,7 @@ function Loginform(props) {
           
           <div className="form-group" style={{ marginBottom: '1.5rem' }}>
             <label htmlFor="username" style={{ display: 'block', fontWeight: '600', color: 'var(--text-color)', marginBottom: '0.5rem' }}>
-              Email Istituzionale
+              Numero di matricola
             </label>
             <input 
               type="text" 

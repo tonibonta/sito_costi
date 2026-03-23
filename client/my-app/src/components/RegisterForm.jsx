@@ -24,7 +24,7 @@ function Registerform(props) {
     
     // Validazione dei campi
     if (!email) {
-      setMessage("Inserisci un indirizzo email valido.");
+      setMessage("Inserisci un numero di matricola valido.");
       return;
     } 
     if (!course) {
@@ -99,7 +99,7 @@ function Registerform(props) {
           {/* Email */}
           <div className="form-group" style={{ marginBottom: '1.2rem' }}>
             <label htmlFor="email" style={{ display: 'block', fontWeight: '600', color: 'var(--text-color)', marginBottom: '0.5rem' }}>
-              Matricola
+              Numero di matricola
             </label>
             <input 
               type="text" 
