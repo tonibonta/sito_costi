@@ -43,8 +43,8 @@ const Storico = (props) => {
     document.title = "Storico - Soft Skills Rehab UniTo";
     API.getAll(props.user.id).then((data)=>{
       
-        if(data!="empty" && data!=undefined){
-        console.log("c")
+        if(data!="empty" && data!="undefined"){
+        console.log(data)
         setCategoria(data);}else{
           setCategoria([]);
         }
