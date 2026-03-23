@@ -59,7 +59,7 @@ const Storico = (props) => {
     console.log(data);
      API.getAll(props.user.id).then((data)=>{
           if(data!="empty"){
-        console.log("c")
+       
         setCategoria(data);}else{
           setCategoria([]);
         }
