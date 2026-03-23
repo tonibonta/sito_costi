@@ -43,7 +43,7 @@ const Storico = (props) => {
     document.title = "Storico - Soft Skills Rehab UniTo";
     API.getAll(props.user.id).then((data)=>{
       
-        if(data!="empty" && data!="undefined"){
+        if(data!="empty" && data!="undefined" && data!=undefined){
         console.log(data)
         setCategoria(data);}else{
           setCategoria([]);
@@ -52,6 +52,8 @@ const Storico = (props) => {
             window.scrollTo(0, 0);
         }, 0);
       
+    }).catch((err)=>{
+      setCategoria([]);
     });  
   },[]); 
  const handleDelete=(val)=>{
