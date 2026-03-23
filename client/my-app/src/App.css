@@ -474,36 +474,34 @@ main {
 .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    background: white;
-    color: var(--primary-color);
     padding: 1.2rem 2.5rem;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
-    /* Transizione fluida fondamentale per il movimento */
-    transition: var(--transition-bounce); 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    
+    /* Questa riga è il motore dell'animazione: dice di animare il transform in 0.3 secondi */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    
+    /* Ombra a riposo */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
     border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    animation: fadeIn 0.8s ease-out 0.4s both;
 }
 
 .btn:hover {
-    /* Sale leggermente (-5px invece di -15px) e scala pochissimo per non sgranare */
-    transform: translateY(-5px) scale(1.02);
-    /* Rimuovi font-size qui per evitare scatti nel testo */
+    /* ECCO IL SEGRETO: Si sposta in alto ESATTAMENTE di 6px */
+    transform: translateY(-6px); 
     
-    /* Aumentiamo l'ombra mentre sale per dare profondità */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    /* L'ombra diventa un po' più grande e sfocata per dare l'illusione che si sia sollevato dalla pagina */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
 }
 
 .btn:active {
-    /* Quando clicchi, torna quasi alla posizione originale */
-    transform: translateY(-2px) scale(0.98);
+    /* Quando fai clic, il bottone si "schiaccia" leggermente tornando quasi alla posizione di partenza */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 /* =========================================

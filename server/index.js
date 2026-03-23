@@ -129,13 +129,15 @@ app.delete('/api/sessions/current', isLoggedIn, (req, res) => {
 });
 
 
-app.post('/api/registrazione',[check('email').isEmail(),
+app.post('/api/registrazione',[check('email').isString()
+    
+    .isLength({ min: 5 }),
   check('course').notEmpty(),
   check('password').isLength({ min: 8 })],(req,res)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     // Restituiamo 400 Bad Request con la lista degli errori
-
+   
     return res.status(400).json({ errors: errors.array() });
    
   }
@@ -144,6 +146,10 @@ app.post('/api/registrazione',[check('email').isEmail(),
     console.log(risultato)
     res.send({"risultato":risultato});
 
+  }).catch((err)=>{
+    {
+    res.send({"risultato":"Matricola già esistente o configurazione password errata"});
+  }
   })
 
 })

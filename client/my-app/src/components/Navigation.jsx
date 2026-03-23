@@ -48,12 +48,13 @@ const Navigation = (props) => {
               :""*/}
                   {props.user?
                 <>
-                <Link to="/" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                <div className="desktop-actions">
+                <Link to="/" className="btn " style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
                   HOME
                 </Link>
-                <Link to="/lab" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                <Link to="/lab" className="btn" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
                   IL LAB
-                </Link></>:""}
+                </Link></div></>:""}
             </div>
 
             {/* Sezione Centrale: Titolo */}
@@ -110,11 +111,16 @@ const Navigation = (props) => {
                   }}>
                     {props.user?<>
                     <Link to="/" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                      Home
+                      HOME
                     </Link>
                     <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                      Dashboard
-                    </Link></>:""}
+                      IL LAB
+                    </Link>
+                    <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                      PROFILO
+                    </Link>
+                    
+                    </>:""}
                     <div onClick={() => setIsDropdownOpen(false)}>
                       {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}
                     </div>

@@ -50,7 +50,7 @@ function Registerform(props) {
             setTimeout(()=>{navigate("/login")},4000);
               
           } else {
-              setMessage('Errore durante la registrazione. Riprova.'); 
+              setMessage(data.risultato); 
           }
          })
       .catch((err) => { 
@@ -136,6 +136,7 @@ function Registerform(props) {
               id="password"
               placeholder="Crea una password" 
               value={password} 
+              minLength={8}
               onChange={event => setPassword(event.target.value)}
               style={{ width: '100%', padding: '0.8rem', border: '1px solid #cbd5e0', borderRadius: '8px', fontFamily: 'var(--font-family)' }}
             />

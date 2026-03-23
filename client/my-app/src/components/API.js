@@ -50,6 +50,7 @@ const logIn = async (credentials) => {
     
   };
 const registrazione = async (credentials) => {
+  console.log(credentials)
 
     return fetch(SERVER_URL + 'registrazione', {
       method: 'POST',
