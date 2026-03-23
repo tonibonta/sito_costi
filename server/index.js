@@ -50,6 +50,7 @@ passport.deserializeUser(function (user, callback) { // this user is id + email 
   return callback(null, user); // this will be available in req.user
 });
 
+const isProduction = process.env.NODE_ENV === 'production';
 /** Creating the session */
 const session = require('express-session');
 
@@ -57,6 +58,19 @@ app.use(session({
   secret: "LXBSMDTMSP2I5XFXIYRGFVWSFI",
   resave: false,
   saveUninitialized: false,
+  proxy: isProduction, // Necessario per Render/Heroku/Vercel
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,
+    // IN LOCALE: false (permette HTTP)
+    // IN PRODUZIONE: true (obbliga HTTPS)
+    secure: isProduction, 
+    
+    // IN LOCALE: 'lax' (default standard)
+    // IN PRODUZIONE: 'none' (permette cross-domain Vercel -> Render)
+    sameSite: isProduction ? 'none' : 'lax',
+    
+    httpOnly: true
+  }
   
 }));
 app.use(passport.authenticate('session'));
