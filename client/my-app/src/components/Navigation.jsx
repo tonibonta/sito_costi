@@ -99,7 +99,7 @@ const Navigation = (props) => {
                     top: '100%',
                     right: -15,
                     marginTop: '5px',
-                    backgroundColor: '#255eb9ff', /* Sfondo scuro per far risaltare il testo bianco dei tuoi bottoni */
+                    backgroundColor: '#3A5F67', /* Sfondo scuro per far risaltare il testo bianco dei tuoi bottoni */
                     borderRadius: '8px',
                     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                     
