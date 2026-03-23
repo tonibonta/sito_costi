@@ -97,7 +97,7 @@ const Navigation = (props) => {
                   <div style={{
                     position: 'absolute',
                     top: '100%',
-                    right: -15,
+                    right: 0,
                     marginTop: '5px',
                     backgroundColor: '#3A5F67', /* Sfondo scuro per far risaltare il testo bianco dei tuoi bottoni */
                     borderRadius: '8px',
