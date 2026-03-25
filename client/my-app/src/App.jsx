@@ -128,7 +128,7 @@ const handleLogout = async () => {
         <Resilienza_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>
-        <Route path='/lavori-in-gruppo' element={loggedIn?
+        <Route path='/lavoro-in-gruppo' element={loggedIn?
         <LavoriInGruppo_layout user={user} loggedIn={loggedIn} handleLogout={handleLogout} />:<LoginLayout loggedIn={loggedIn} login={handleLogin}
                                         user={user}/>
       }></Route>

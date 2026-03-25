@@ -4,14 +4,29 @@ import '../App.css'; // Qui andremo ad aggiungere due righe di CSS
 import { Container } from 'react-bootstrap';
 import { LoginButton, LogoutButton } from './Loginform';
 import logoImg from "../assets/logo.png"
+
 const Navigation = (props) => {
   // Stato per il menu hamburger (sinistra)
   const [isMenuActive, setIsMenuActive] = useState(false);
   // Nuovo stato per la tendina (destra) su mobile
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+  // NUOVO: Stato per gestire l'hover sul pulsante "IL LAB"
+  const [isLabHovered, setIsLabHovered] = useState(false);
 
   const toggleMenu = () => setIsMenuActive(!isMenuActive);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  // Stile per i link dentro la tendina del LAB
+  const labDropdownLinkStyle = {
+    color: 'white',
+    textDecoration: 'none',
+    padding: '10px 20px',
+    display: 'block',
+    fontSize: '0.9rem',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    textAlign: 'left',
+    whiteSpace: 'nowrap'
+  };
 
   return (
     <>
@@ -32,59 +47,83 @@ const Navigation = (props) => {
             }}
           >
             {/* Sezione Sinistra: Menu Hamburger */}
-            
             <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'center'}}>
-              {/*props.user?
-              <div 
-                className="menu-toggle" 
-                id="mobile-menu" 
-                onClick={toggleMenu} 
-                style={{ cursor: 'pointer' }}
-              >
-                <span className="bar"></span>
-                <span className="bar"></span>
-                <span className="bar"></span>
-              </div>
-              :""*/}
-                  {props.user?
+              {props.user ? (
                 <>
-                <div className="desktop-actions">
-                <Link to="/" className="btn " style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                  HOME
-                </Link>
-                <Link to="/lab" className="btn" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                  IL LAB
-                </Link></div></>:""}
+                  <div className="desktop-actions" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <Link to="/" className="btn" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                      HOME
+                    </Link>
+                    
+                    {/* MENU A TENDINA IL LAB (Hover) */}
+                    <div 
+                      style={{ position: 'relative' }}
+                      onMouseEnter={() => setIsLabHovered(true)}
+                      onMouseLeave={() => setIsLabHovered(false)}
+                    >
+                      <Link to="/lab" className="btn" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                        IL LAB ▾
+                      </Link>
+
+                      {/* Dropdown che appare in hover */}
+                      {isLabHovered && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '100%',
+                          left: '0', // Allineato a sinistra del pulsante
+                          backgroundColor: '#3A5F67',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          minWidth: '220px',
+                          zIndex: 1000,
+                          padding: '5px 0',
+                          marginTop: '0px' // attaccato al bottone per non perdere l'hover
+                        }}>
+                          <Link to="/gestione-tempo" style={labDropdownLinkStyle}>Gestione del Tempo</Link>
+                          <Link to="/problem-solving" style={labDropdownLinkStyle}>Problem Solving</Link>
+                          <Link to="/autoregolazione-emotiva" style={labDropdownLinkStyle}>Autoregolazione emotiva</Link>
+                          <Link to="/valorizzazione-di-se" style={labDropdownLinkStyle}>Valorizzazione di sè</Link>
+                          <Link to="/orientamento-obiettivo" style={labDropdownLinkStyle}>Orientamento all'obiettivo</Link>
+                          <Link to="/intraprendenza" style={labDropdownLinkStyle}>Intraprendenza</Link>
+                          <Link to="/attribuzione-causale" style={labDropdownLinkStyle}>Attribuzione causale</Link>
+                          <Link to="/resilienza" style={labDropdownLinkStyle}>Resilienza</Link>
+                          <Link to="/lavoro-in-gruppo" style={labDropdownLinkStyle}>Lavoro in gruppo</Link>
+                          <Link to="/comunicazione" style={labDropdownLinkStyle}>Comunicazione</Link>
+                          <Link to="/gestione-conflitto" style={{...labDropdownLinkStyle, borderBottom: 'none'}}>Gestione del conflitto</Link>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              ) : ""}
             </div>
 
             {/* Sezione Centrale: Titolo */}
             <h1 style={{ 
               margin: 0,
-            
               textAlign: 'center',
               whiteSpace: 'nowrap'
             }}>
-               <img style={{width:"200px",marginTop:"10px"}} src={logoImg} />
+               <img style={{width:"200px", marginTop:"10px"}} src={logoImg} alt="Logo" />
             </h1>
 
             {/* Sezione Destra: Pulsanti (PC) o Tendina (Mobile) */}
             <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'center' }}>
               
               {/* --- VISTA PC (nascosta su mobile) --- */}
-              
               <div className="desktop-actions" style={{ display: 'flex', gap: '15px' }}>
-                {props.user?
-                <>
-              
-                <Link to="/storico" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                  PROFILO
-                </Link></>:""}
+                {props.user ? (
+                  <Link to="/storico" className="btn btn-outline-primary btn-sm" style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                    PROFILO
+                  </Link>
+                ) : ""}
                {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}  
               </div>
              
               {/* --- VISTA SMARTPHONE (nascosta su PC) --- */}
               <div className="mobile-dropdown-container" style={{ position: 'relative' }}>
-                {/* Icona dei 3 pallini per aprire la tendina */}
                 <button 
                   onClick={toggleDropdown}
                   style={{ background: 'transparent', border: 'none', color: 'white', fontSize: '1.5rem', cursor: 'pointer', padding: '0 5px' }}
@@ -92,35 +131,33 @@ const Navigation = (props) => {
                   ⋮
                 </button>
                 
-                {/* Il menu a tendina vero e proprio */}
                 {isDropdownOpen && (
                   <div style={{
                     position: 'absolute',
                     top: '100%',
                     right: 0,
                     marginTop: '5px',
-                    backgroundColor: '#3A5F67', /* Sfondo scuro per far risaltare il testo bianco dei tuoi bottoni */
+                    backgroundColor: '#3A5F67',
                     borderRadius: '8px',
                     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                    
                     display: 'flex',
                     flexDirection: 'column',
-                    
                     minWidth: '100px',
                     zIndex: 10
                   }}>
-                    {props.user?<>
-                    <Link to="/" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                      HOME
-                    </Link>
-                    <Link to="/lab" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                      IL LAB
-                    </Link>
-                    <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
-                      PROFILO
-                    </Link>
-                    
-                    </>:""}
+                    {props.user ? (
+                      <>
+                        <Link to="/" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                          HOME
+                        </Link>
+                        <Link to="/lab" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                          IL LAB
+                        </Link>
+                        <Link to="/storico" className="btn btn-outline-primary btn-sm" onClick={() => setIsDropdownOpen(false)} style={{ backgroundColor: "transparent", color: "white", boxShadow: "none" }}>
+                          PROFILO
+                        </Link>
+                      </>
+                    ) : ""}
                     <div onClick={() => setIsDropdownOpen(false)}>
                       {props.loggedIn ? <LogoutButton logout={props.logOut} /> : <LoginButton />}
                     </div>
@@ -129,11 +166,10 @@ const Navigation = (props) => {
               </div>
 
             </div>
-
           </div>
         </header>
 
-      {/* Menu laterale a comparsa */}
+        {/* Menu laterale a comparsa */}
         <nav className={`sidebar ${isMenuActive ? 'active' : ''}`} id="sidebar">
           <div className="sidebar-header">
             <h2>Menu</h2>
@@ -142,7 +178,6 @@ const Navigation = (props) => {
             </button>
           </div>
           <ul>
-  
             <li><Link to="/gestione-tempo">Gestione del Tempo</Link></li>
             <li><Link to="/problem-solving">Problem Solving</Link></li>
             <li><Link to="/autoregolazione-emotiva">Autoregolazione emotiva</Link></li>
@@ -151,11 +186,9 @@ const Navigation = (props) => {
             <li><Link to="/intraprendenza">Intraprendenza</Link></li>
             <li><Link to="/attribuzione-causale">Attribuzione causale del successo e dell'insuccesso</Link></li>
             <li><Link to="/resilienza">Resilienza</Link></li>
-            <li><Link to="/lavoriingruppo">Lavoro in gruppo</Link></li>
+            <li><Link to="/lavoro-in-gruppo">Lavoro in gruppo</Link></li>
             <li><Link to="/comunicazione">Comunicazione</Link></li>
-            <li><Link to="/gestioneconflitto">Gestione del conflitto</Link></li>
-            
-
+            <li><Link to="/gestione-conflitto">Gestione del conflitto</Link></li>
           </ul>
         </nav>
       </Container>

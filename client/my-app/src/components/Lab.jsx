@@ -71,7 +71,7 @@ E’ l’esito di un processo complesso che prevede la valutazione di sé, il co
                 </Link>
       </section>
          <section className="info-section" style={{marginTop:"20px",}}>
-        <h3 >Autoregolazione emotiva (tolleranza di ansia e stress volezza emotiva)</h3>
+        <h3 >Autoregolazione emotiva (tolleranza di ansia e stress e consapevolezza emotiva)</h3>
         <p>
 Capacità di contenere le proprie reazioni di fronte a stimoli esterni ed interni di forte Intensità, sia positivi sia negativi, evitando comportamenti non controllati.      
         </p>
